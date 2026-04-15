@@ -1,6 +1,7 @@
 /data/
 /models/
 .env
+keys.md
 __pycache__/
 .ipynb_checkpoints/
 *.pyc
