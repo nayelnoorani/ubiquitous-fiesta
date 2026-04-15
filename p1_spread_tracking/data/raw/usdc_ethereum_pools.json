@@ -1,0 +1,1353 @@
+[
+  {
+    "pool": "43641cf5-a92e-416b-bce9-27113d3c0db6",
+    "project": "maple",
+    "symbol": "USDC",
+    "poolMeta": "Syrup USDC",
+    "tvlUsd": 3441869478
+  },
+  {
+    "pool": "aa70268e-4b52-42bf-a116-608b370f9501",
+    "project": "aave-v3",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 794540159
+  },
+  {
+    "pool": "c5c74dd1-995c-4445-9d84-3e710bad7d52",
+    "project": "spark-savings",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 402691699
+  },
+  {
+    "pool": "811da684-855f-434f-9bfd-52679f9707b9",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND",
+    "tvlUsd": 369836257
+  },
+  {
+    "pool": "99f0f74d-c525-4c2b-9b8f-a90cc2097475",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - steakUSDC",
+    "tvlUsd": 196363134
+  },
+  {
+    "pool": "4438dabc-7f0c-430b-8136-2722711ae663",
+    "project": "fluid-lending",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 189782903
+  },
+  {
+    "pool": "59e8a5a4-38a6-4707-bce7-096dbec62f0e",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - gtUSDC",
+    "tvlUsd": 114268996
+  },
+  {
+    "pool": "7da72d09-56ca-4ec5-a45f-59114353e487",
+    "project": "compound-v3",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 109154119
+  },
+  {
+    "pool": "ecbcfcd3-81b5-4f82-8a5e-fa88c715c43a",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - bbqUSDC",
+    "tvlUsd": 60925707
+  },
+  {
+    "pool": "3ce51c15-acfc-4244-a168-02a4c42471d4",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - vbshUSDC",
+    "tvlUsd": 48908791
+  },
+  {
+    "pool": "0fde8996-ecdf-441c-94a9-ec67403e9b8c",
+    "project": "euler-v2",
+    "symbol": "USDC",
+    "poolMeta": "EVK Vault eUSDC-80",
+    "tvlUsd": 41409671
+  },
+  {
+    "pool": "c89af47f-032a-4c59-bdc9-17a7f1514a3b",
+    "project": "goldfinch",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 37247145
+  },
+  {
+    "pool": "31a0cd94-b781-4e0d-a9f1-1702bc2c238f",
+    "project": "euler-v2",
+    "symbol": "USDC",
+    "poolMeta": "EVK Vault eUSDC-70",
+    "tvlUsd": 28648077
+  },
+  {
+    "pool": "7d89af7a-24c9-4292-aa38-7c71b05fbd6d",
+    "project": "yearn-finance",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 28111429
+  },
+  {
+    "pool": "b57b267b-f158-4ab0-854a-420aa6e1aaa5",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - bbqUSDC",
+    "tvlUsd": 22136922
+  },
+  {
+    "pool": "2eabb8db-bc9a-4e83-81e2-ed7808b50678",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND",
+    "tvlUsd": 20471771
+  },
+  {
+    "pool": "9bbd2b18-8181-42e2-be4e-aef68b8a62e2",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - hUSDC",
+    "tvlUsd": 17435804
+  },
+  {
+    "pool": "75489440-a54f-4b2b-abab-aaa7096c9b85",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - gtsy",
+    "tvlUsd": 15427307
+  },
+  {
+    "pool": "337019a2-a1ef-4f4e-8af4-5f383ed3bd50",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - GTEST",
+    "tvlUsd": 15427240
+  },
+  {
+    "pool": "67c068a9-1da0-4cba-b0e0-50ecee559ef8",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - hyperMorphoUSDC",
+    "tvlUsd": 14581652
+  },
+  {
+    "pool": "20e45c3e-7de7-4d34-89e7-20858ecdf252",
+    "project": "dolomite",
+    "symbol": "USDC",
+    "poolMeta": "Dolomite Balance",
+    "tvlUsd": 13942657
+  },
+  {
+    "pool": "c92a0b75-4f2b-4503-8cd8-39b3c678e06d",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - sbMorphoUSDC",
+    "tvlUsd": 11387445
+  },
+  {
+    "pool": "f5565fca-48a4-434f-9003-963a874b026e",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - gtUSDCcore",
+    "tvlUsd": 11233175
+  },
+  {
+    "pool": "92baa34c-46cd-43c9-ba5c-6dc80d5a9fb0",
+    "project": "termmax",
+    "symbol": "USDC",
+    "poolMeta": "TermMax USDC Vault V2",
+    "tvlUsd": 11191348
+  },
+  {
+    "pool": "199bbb2d-42a5-4a48-9ea4-6818cbc2b687",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - LVUSDC",
+    "tvlUsd": 11024459
+  },
+  {
+    "pool": "5d27554a-d2b8-4881-8c5c-6b288d7f6877",
+    "project": "lazy-summer-protocol",
+    "symbol": "USDC",
+    "poolMeta": "Lower Risk USDC",
+    "tvlUsd": 11023935
+  },
+  {
+    "pool": "58226309-3608-4c9d-bf4d-62d1c637bee9",
+    "project": "yo-protocol",
+    "symbol": "USDC",
+    "poolMeta": "yoUSD",
+    "tvlUsd": 10982046
+  },
+  {
+    "pool": "1ed7e9b4-594c-46d3-964c-7192147f8aa8",
+    "project": "autofinance",
+    "symbol": "USDC",
+    "poolMeta": "siloUSD",
+    "tvlUsd": 8750580
+  },
+  {
+    "pool": "42655791-4f97-4abc-a05c-dbbb06f8eb8d",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - kpk_USDC_v2",
+    "tvlUsd": 8724403
+  },
+  {
+    "pool": "103834fa-cd96-4522-96e0-2075244cb3bc",
+    "project": "autofinance",
+    "symbol": "USDC",
+    "poolMeta": "autoUSD",
+    "tvlUsd": 8613885
+  },
+  {
+    "pool": "86b405e6-83d7-44cb-8a03-2b55a122be87",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - augustUSDC",
+    "tvlUsd": 7996684
+  },
+  {
+    "pool": "e7973a06-67fe-41c8-906b-ee71a69a5a5a",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - gtusdcf",
+    "tvlUsd": 7976140
+  },
+  {
+    "pool": "f04f2c87-c4f3-4476-9624-eb36a0b029e4",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - augustUSDCv2",
+    "tvlUsd": 7781190
+  },
+  {
+    "pool": "ed20464a-5093-4ac5-9c37-e05e95bbf17a",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "BORROW",
+    "tvlUsd": 6510333
+  },
+  {
+    "pool": "d99fed55-d629-4117-96f8-f72c1999c4a4",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - USUALUSDC+",
+    "tvlUsd": 6049284
+  },
+  {
+    "pool": "6612ea5f-0d53-4a79-a131-27d847afbee6",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - 1337USDC",
+    "tvlUsd": 5490884
+  },
+  {
+    "pool": "1e648165-e7b4-4f36-bec1-3828b42011d1",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - safe-bbqUSDC",
+    "tvlUsd": 5480884
+  },
+  {
+    "pool": "45fdae93-7ce2-4c9f-a010-c216b7414461",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - kpk_USDC_YieldV2",
+    "tvlUsd": 5313696
+  },
+  {
+    "pool": "27296bf9-617a-46e4-9d6d-eefc71e9e0b6",
+    "project": "aave-v3",
+    "symbol": "USDC",
+    "poolMeta": "horizon-market",
+    "tvlUsd": 5285174
+  },
+  {
+    "pool": "db446cb6-2ec5-4fdd-9812-bdbeab125a31",
+    "project": "fluid-lending",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 4639561
+  },
+  {
+    "pool": "eb0c5ee9-046e-47fa-9b7d-ea52ae7e59c6",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - safe-steakUSDC",
+    "tvlUsd": 4485028
+  },
+  {
+    "pool": "e0e7141e-19a0-4cfa-8b2f-39d45ae34c2b",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - mOUSD",
+    "tvlUsd": 4348074
+  },
+  {
+    "pool": "e376d38c-a8f4-4420-8dbe-35036ebeaff8",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - alphaForexV2",
+    "tvlUsd": 4231729
+  },
+  {
+    "pool": "c46d67c5-64ab-4efc-a242-b042b7982956",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - alphaForexV2",
+    "tvlUsd": 4231729
+  },
+  {
+    "pool": "c87de679-4543-4d4f-8c19-62b95db13943",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - SGUCC",
+    "tvlUsd": 4090437
+  },
+  {
+    "pool": "f6dbe79d-c610-42b3-b48d-2fba973771b8",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - luloUSDC",
+    "tvlUsd": 4087576
+  },
+  {
+    "pool": "d5959f91-86ce-4177-b234-49e1f17d8f82",
+    "project": "yearn-finance",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 3712476
+  },
+  {
+    "pool": "b87708d0-742a-4e14-95df-e1a22aea3b4f",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - roxUSDCy",
+    "tvlUsd": 3151862
+  },
+  {
+    "pool": "3c9316ef-3d77-4228-afdb-b60eef40227b",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "BORROW",
+    "tvlUsd": 3082432
+  },
+  {
+    "pool": "9cfeb3ef-c729-47f1-b8b1-3fec6ff6041d",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - Api3-dCOMP-USDC",
+    "tvlUsd": 3050648
+  },
+  {
+    "pool": "45bf28a5-fce0-4429-be34-b30cd7925af2",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - Api3-dCOMP-USDC",
+    "tvlUsd": 3049881
+  },
+  {
+    "pool": "af0ea54b-cd3e-4419-8cee-fcd3160b4f85",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - AVGUSDCcons",
+    "tvlUsd": 2953104
+  },
+  {
+    "pool": "1238c321-5868-4671-b1d3-c0e3a9cdf022",
+    "project": "allbridge-classic",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 2809273
+  },
+  {
+    "pool": "ee19ed7a-aa2f-49e0-95e4-5e96e5e7adbf",
+    "project": "termmax",
+    "symbol": "USDC",
+    "poolMeta": "TermMax x MezenCap Ext",
+    "tvlUsd": 2737395
+  },
+  {
+    "pool": "5111943b-f0cd-4de3-b69f-bd1208de25d6",
+    "project": "bracket-vaults",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 2704172
+  },
+  {
+    "pool": "5776ffc6-a789-4ad5-80d0-631bc54f80c5",
+    "project": "fusion-by-ipor",
+    "symbol": "USDC",
+    "poolMeta": "TAU InfiniFi Pointsmax",
+    "tvlUsd": 2702946
+  },
+  {
+    "pool": "504275a6-9e13-42d2-a741-1fb73843962e",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "POOL",
+    "tvlUsd": 2701133
+  },
+  {
+    "pool": "cefa9bb8-c230-459a-a855-3b94e96acd8c",
+    "project": "compound-v2",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 2669790
+  },
+  {
+    "pool": "2ecc64d8-8b26-4c3f-83d1-edbf37532a2d",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - yOG-USDC-V2",
+    "tvlUsd": 2640723
+  },
+  {
+    "pool": "effcb4a4-4dcb-45e5-935d-f15542c13e6b",
+    "project": "aave-v3",
+    "symbol": "USDC",
+    "poolMeta": "lido-market",
+    "tvlUsd": 2549089
+  },
+  {
+    "pool": "3d9a6a27-a1c5-4503-85e7-e6e5bd954a9f",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - LVUSDC",
+    "tvlUsd": 2526098
+  },
+  {
+    "pool": "02372f24-5528-4e5e-bd99-4325c8149b51",
+    "project": "lazy-summer-protocol",
+    "symbol": "USDC",
+    "poolMeta": "Higher Risk USDC",
+    "tvlUsd": 2525978
+  },
+  {
+    "pool": "45ecff73-d1b5-412f-ae15-c409034cc14c",
+    "project": "beefy",
+    "symbol": "USDC",
+    "poolMeta": "Morpho",
+    "tvlUsd": 2488833
+  },
+  {
+    "pool": "fa4d7ee4-0001-4133-9e8d-cf7d5d194a91",
+    "project": "flux-finance",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 2429701
+  },
+  {
+    "pool": "1b4a0b78-a1ea-4555-8146-472b7813833a",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - kUSDC",
+    "tvlUsd": 2303407
+  },
+  {
+    "pool": "0d08331e-589e-48f1-b847-5571e3e5f5ee",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - ellenUSDC",
+    "tvlUsd": 2219549
+  },
+  {
+    "pool": "1b5e5f32-c534-42d1-a770-7e8051abb202",
+    "project": "termmax",
+    "symbol": "USDC",
+    "poolMeta": "TermMax x Mezen Capital Vault V2",
+    "tvlUsd": 2007409
+  },
+  {
+    "pool": "eb342dc8-8d50-4300-8e92-c8d88e026c94",
+    "project": "vesper",
+    "symbol": "USDC",
+    "poolMeta": "Aggressive",
+    "tvlUsd": 1994519
+  },
+  {
+    "pool": "65ce8276-b4d9-41ba-9f6f-21fc374cf9bc",
+    "project": "sparklend",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 1920666
+  },
+  {
+    "pool": "6ca49836-3b58-47a4-bdf8-90ecd462b24c",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - hyperBastionUSDC",
+    "tvlUsd": 1756566
+  },
+  {
+    "pool": "05a3d186-2d42-4e21-b1f0-68c079d22677",
+    "project": "yearn-finance",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 1675660
+  },
+  {
+    "pool": "90cb9575-6a55-4900-9536-ead80c7dfa6c",
+    "project": "yearn-finance",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 1672730
+  },
+  {
+    "pool": "7b286848-8ca6-4f7f-8cd3-c33e15f1ba72",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - cronosUSDC",
+    "tvlUsd": 1590809
+  },
+  {
+    "pool": "479fc0b6-a7d7-4b8e-9857-1620febc3de8",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - hyperUSDCm",
+    "tvlUsd": 1414473
+  },
+  {
+    "pool": "57bf7341-6fed-4ffe-9ea1-54e5d7eb1539",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - bbqUSDCturbo",
+    "tvlUsd": 1307443
+  },
+  {
+    "pool": "5d727c74-3199-4327-87d1-d07edb71e325",
+    "project": "symbiosis",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 1296439
+  },
+  {
+    "pool": "dee0abb6-c1c8-455f-a0f1-9a51b823def7",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - alphaUSDCAsiaV2",
+    "tvlUsd": 1276255
+  },
+  {
+    "pool": "f1b5dafa-4562-41ea-9597-053162460c49",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "HOLD - SY-USD3",
+    "tvlUsd": 1193813
+  },
+  {
+    "pool": "2b7f6b6d-39fd-4bbe-ab37-d0e56615dde0",
+    "project": "across",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 1182574
+  },
+  {
+    "pool": "72716390-9c61-49fc-8ba4-6922a903289a",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "HOLD - SY-DUSD",
+    "tvlUsd": 1180073
+  },
+  {
+    "pool": "6dc5652b-c1f0-4871-ac8e-bff2eaddac2a",
+    "project": "yearn-finance",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 1170720
+  },
+  {
+    "pool": "6e6f53b6-6669-4037-948c-f42e5b0a243e",
+    "project": "harvest-finance",
+    "symbol": "USDC",
+    "poolMeta": "Morpho - Gauntlet Frontier V2",
+    "tvlUsd": 1081785
+  },
+  {
+    "pool": "94cfc34b-92a2-46cb-9a0a-5e0a265eeed4",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - CSHYUSDC",
+    "tvlUsd": 1075867
+  },
+  {
+    "pool": "7e2204e5-12a3-4693-962f-326d4fb90e31",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - resolvUSDC",
+    "tvlUsd": 1030797
+  },
+  {
+    "pool": "3f8fbaaf-2207-48ef-ae30-000f2a276c6e",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - grove-bbqUSDC",
+    "tvlUsd": 1013248
+  },
+  {
+    "pool": "5f2a8df2-bdf8-41a1-a3b4-1ec039eb0db9",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - grove-bbqUSDC",
+    "tvlUsd": 1013244
+  },
+  {
+    "pool": "6e80f8cf-7d4f-4908-820c-bbd3b9effc65",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - alphaEnhancedV2",
+    "tvlUsd": 1010524
+  },
+  {
+    "pool": "1b532a84-38ab-4e80-8bd2-94f062810ac4",
+    "project": "gearbox",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 1004837
+  },
+  {
+    "pool": "82c4b5fc-9510-42fa-99b4-60eca9f83d82",
+    "project": "termmax",
+    "symbol": "USDC",
+    "poolMeta": "Ellen Capital USDC Prime",
+    "tvlUsd": 1003020
+  },
+  {
+    "pool": "160f648a-78ec-416c-bc58-5edb9cc5c468",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - sparkUSDCbc",
+    "tvlUsd": 1000280
+  },
+  {
+    "pool": "26bb3294-66b9-459a-921a-62822ea51e7b",
+    "project": "euler-v2",
+    "symbol": "USDC",
+    "poolMeta": "kpk RWA Euler USDC",
+    "tvlUsd": 1000045
+  },
+  {
+    "pool": "b738b05d-ee8a-48eb-90ac-77bdc596a9a6",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - alphaUSDCAsiaV2",
+    "tvlUsd": 923354
+  },
+  {
+    "pool": "a0f53224-c152-416e-8599-4563e70c6040",
+    "project": "euler-v2",
+    "symbol": "USDC",
+    "poolMeta": "EVK Vault eUSDC-2",
+    "tvlUsd": 893679
+  },
+  {
+    "pool": "d091bbc5-83af-45ef-8e6e-26502c86d9d9",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - alphaUSDCPrimeV2",
+    "tvlUsd": 824630
+  },
+  {
+    "pool": "99e7b365-edb9-496c-9b44-7181d49c999a",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "BORROW",
+    "tvlUsd": 820965
+  },
+  {
+    "pool": "468f182d-76e4-46a0-970b-e98b21fcc4a6",
+    "project": "lazy",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 791752
+  },
+  {
+    "pool": "ce17a53c-5299-42be-bd2c-b28a6a855939",
+    "project": "fusion-by-ipor",
+    "symbol": "USDC",
+    "poolMeta": "TAU Yield Bond ETF",
+    "tvlUsd": 739885
+  },
+  {
+    "pool": "128694e1-b470-41e2-a459-f441d35665b8",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "POOL",
+    "tvlUsd": 739583
+  },
+  {
+    "pool": "5ee539c7-cfae-41c7-8bf4-b3d2522c33f0",
+    "project": "euler-v2",
+    "symbol": "USDC",
+    "poolMeta": "EVK Vault eUSDC-98",
+    "tvlUsd": 715913
+  },
+  {
+    "pool": "1d93c2d1-404f-489f-9785-901154657006",
+    "project": "fusion-by-ipor",
+    "symbol": "USDC",
+    "poolMeta": "TAU InfiniFi Pointsmaxx - Silo",
+    "tvlUsd": 684260
+  },
+  {
+    "pool": "1afd258e-0c80-4100-823a-fac22fe57e42",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "POOL",
+    "tvlUsd": 684196
+  },
+  {
+    "pool": "d5c2ab6a-2b1e-48b5-9737-7962bce2dc39",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - HTP_USDC",
+    "tvlUsd": 567770
+  },
+  {
+    "pool": "e5a2f2e1-f151-4047-9a30-62af991cff5c",
+    "project": "fusion-by-ipor",
+    "symbol": "USDC",
+    "poolMeta": "IPOR USDC Lending Optimizer Ethereum",
+    "tvlUsd": 565153
+  },
+  {
+    "pool": "fd8fd9a4-6a5b-4320-a791-0a446807818b",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - UNKNOWN",
+    "tvlUsd": 553558
+  },
+  {
+    "pool": "641625b6-77a8-455d-ba87-4188f6e504a4",
+    "project": "termmax",
+    "symbol": "USDC",
+    "poolMeta": "Prime Yield",
+    "tvlUsd": 504434
+  },
+  {
+    "pool": "7105734d-9cc9-4c85-b54b-404c86c843fb",
+    "project": "silo-v2",
+    "symbol": "USDC",
+    "poolMeta": "181",
+    "tvlUsd": 493167
+  },
+  {
+    "pool": "b77ea8a2-b4c8-4af3-bb58-b9386a60479f",
+    "project": "fusion-by-ipor",
+    "symbol": "USDC",
+    "poolMeta": "Tesseract USDC Lending Optimizer",
+    "tvlUsd": 483572
+  },
+  {
+    "pool": "e6f0ed9d-1b80-4cec-9053-a0f0fc5913b6",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "POOL",
+    "tvlUsd": 483421
+  },
+  {
+    "pool": "0ea2946d-ae68-47bd-a243-879df37be925",
+    "project": "termmax",
+    "symbol": "USDC",
+    "poolMeta": "Keyrock USDC",
+    "tvlUsd": 430117
+  },
+  {
+    "pool": "b3eae38a-af5c-4988-a763-bf4cf4db769e",
+    "project": "fusion-by-ipor",
+    "symbol": "USDC",
+    "poolMeta": "TAU Reservoir Pointsmax",
+    "tvlUsd": 407888
+  },
+  {
+    "pool": "7b42a4f7-c44a-4195-b598-69b4d1b18869",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "POOL",
+    "tvlUsd": 407884
+  },
+  {
+    "pool": "f4805c75-9ee0-4cc6-9325-0badcf7bfea1",
+    "project": "csigma-finance",
+    "symbol": "USDC",
+    "poolMeta": "Superior Quality Private Credit USDC",
+    "tvlUsd": 407119
+  },
+  {
+    "pool": "72f2777a-95f3-40d4-8936-ee35116434a3",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND",
+    "tvlUsd": 405898
+  },
+  {
+    "pool": "4ab6a5e5-0e1e-4c95-9486-189d5d110215",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - ynUSDC",
+    "tvlUsd": 396005
+  },
+  {
+    "pool": "5fd0b045-3c93-43d0-a0a0-b1e6473ff043",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - ynUSDC",
+    "tvlUsd": 390750
+  },
+  {
+    "pool": "50458e90-97d8-4f55-8434-5ced3616b9cd",
+    "project": "peapods-finance",
+    "symbol": "USDC",
+    "poolMeta": "Peapods Interest Bearing USDC - 24",
+    "tvlUsd": 384309
+  },
+  {
+    "pool": "d6c22dd1-0f3c-4950-a73e-7fd6897554a3",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "POOL",
+    "tvlUsd": 378333
+  },
+  {
+    "pool": "5ef4e02f-c79f-4db1-9dc7-cfa83ea158fd",
+    "project": "fusion-by-ipor",
+    "symbol": "USDC",
+    "poolMeta": "TAU Lending Optimizer",
+    "tvlUsd": 373030
+  },
+  {
+    "pool": "acd428e1-c79a-448b-82a0-8be583c7ec1c",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "POOL",
+    "tvlUsd": 372962
+  },
+  {
+    "pool": "909f8cf3-58b1-4856-9a70-30ad861ef67d",
+    "project": "autofinance",
+    "symbol": "USDC",
+    "poolMeta": "anchrgUSD",
+    "tvlUsd": 366260
+  },
+  {
+    "pool": "4ac1a968-68ab-4da8-87e3-8f1e15e3dae2",
+    "project": "aave-v4",
+    "symbol": "USDC",
+    "poolMeta": "core",
+    "tvlUsd": 359864
+  },
+  {
+    "pool": "53398d30-1a1d-480f-8353-553ab84d4093",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - ready-bbqUSDC",
+    "tvlUsd": 356701
+  },
+  {
+    "pool": "6fecb964-9a65-485f-8c3d-60b4ad7b1670",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - AVGUSDCCORE",
+    "tvlUsd": 343117
+  },
+  {
+    "pool": "1a018e34-d1dd-45fd-bfee-ab41554bd320",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - CSHYUSDC",
+    "tvlUsd": 320706
+  },
+  {
+    "pool": "26a11176-7fe6-4783-8d06-1b2be27b1280",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "BORROW",
+    "tvlUsd": 294358
+  },
+  {
+    "pool": "294ba606-a675-4156-96b1-5a8b7dc5c748",
+    "project": "wasabi-perps",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 265253
+  },
+  {
+    "pool": "38f1474f-bb56-46ff-b2c6-bc07539a1f2b",
+    "project": "aave-v4",
+    "symbol": "USDC",
+    "poolMeta": "prime",
+    "tvlUsd": 259872
+  },
+  {
+    "pool": "a0f1def1-eacd-4b3a-91a1-be9a9c0cbc2c",
+    "project": "euler-v2",
+    "symbol": "USDC",
+    "poolMeta": "EVK Vault eUSDC-95",
+    "tvlUsd": 234844
+  },
+  {
+    "pool": "fa68041a-2ce5-4ee5-88a0-ec5185f0bdb7",
+    "project": "euler-v2",
+    "symbol": "USDC",
+    "poolMeta": "EVK Vault eUSDC-22",
+    "tvlUsd": 229189
+  },
+  {
+    "pool": "7c007743-3514-4a7e-bcad-a356e2de7aa2",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - erUSDC",
+    "tvlUsd": 228364
+  },
+  {
+    "pool": "623df55e-d1f0-4fe9-b4df-c45331b0c585",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - fxUSDC",
+    "tvlUsd": 227650
+  },
+  {
+    "pool": "9ad24bfa-beb6-4ad1-b46c-40b8a7a72e68",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "BORROW",
+    "tvlUsd": 215348
+  },
+  {
+    "pool": "959a5553-090c-4458-ac8f-ab83585b85fa",
+    "project": "lazy-summer-protocol",
+    "symbol": "USDC",
+    "poolMeta": "DAO LazyVault USDC 1",
+    "tvlUsd": 201352
+  },
+  {
+    "pool": "763881fe-08e5-4d56-a6eb-26f67a00daf2",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "POOL",
+    "tvlUsd": 196100
+  },
+  {
+    "pool": "1a4f5b07-5f47-4974-b180-964a6bf5bbe8",
+    "project": "ipor-derivatives",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 196098
+  },
+  {
+    "pool": "63ce453d-df53-484a-b115-d28ada2254a2",
+    "project": "vesper",
+    "symbol": "USDC",
+    "poolMeta": "Conservative",
+    "tvlUsd": 187761
+  },
+  {
+    "pool": "bd6115c6-e90b-4888-a978-c642aed23d7b",
+    "project": "yearn-finance",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 182398
+  },
+  {
+    "pool": "7c211189-4276-42bd-a9ca-3fe3f218ff82",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND",
+    "tvlUsd": 180499
+  },
+  {
+    "pool": "c24d9138-51aa-48f4-a445-7f33bf7bf5fb",
+    "project": "stargate-v1",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 173249
+  },
+  {
+    "pool": "54bf0a31-199a-46b3-b879-e7f6d7fa584b",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - sdUSDCv2",
+    "tvlUsd": 163369
+  },
+  {
+    "pool": "736b9836-d7a2-40d6-b15d-12657989b0b1",
+    "project": "radiant-v2",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 142071
+  },
+  {
+    "pool": "54d11b1d-0d58-4788-965d-47b8a9e57de0",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - phiUSDC",
+    "tvlUsd": 141997
+  },
+  {
+    "pool": "2b181181-f200-44d0-81bf-31f3575fea4c",
+    "project": "euler-v2",
+    "symbol": "USDC",
+    "poolMeta": "EVK Vault eUSDC-69",
+    "tvlUsd": 131348
+  },
+  {
+    "pool": "6c37ee78-e079-461c-989a-0a2b5a3cee27",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - MC_PTs",
+    "tvlUsd": 128745
+  },
+  {
+    "pool": "d3b5e811-c8cc-43be-9299-d57db4636ee8",
+    "project": "sherlock",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 125714
+  },
+  {
+    "pool": "5b91998c-7db9-4b5e-8caf-343b55769151",
+    "project": "euler-v2",
+    "symbol": "USDC",
+    "poolMeta": "EVK Vault eUSDC-42",
+    "tvlUsd": 116555
+  },
+  {
+    "pool": "939b0cda-7d65-41b8-9226-f28949a857e8",
+    "project": "euler-v2",
+    "symbol": "USDC",
+    "poolMeta": "EVK Vault eUSDC-45",
+    "tvlUsd": 113702
+  },
+  {
+    "pool": "5725b029-4ad5-4f12-b61c-c1cd79002354",
+    "project": "fusion-by-ipor",
+    "symbol": "USDC",
+    "poolMeta": "Hyperithm mHYPER Looping",
+    "tvlUsd": 101294
+  },
+  {
+    "pool": "e945826d-6546-4f29-b276-9583ce2f0f68",
+    "project": "euler-v2",
+    "symbol": "USDC",
+    "poolMeta": "Euler Earn USDC",
+    "tvlUsd": 98879
+  },
+  {
+    "pool": "4bb695e2-bd1c-473e-81ca-4e3d027cad78",
+    "project": "euler-v2",
+    "symbol": "USDC",
+    "poolMeta": "EVK Vault eUSDC-63",
+    "tvlUsd": 76604
+  },
+  {
+    "pool": "e35051d9-93dd-4d5d-b495-8fa39c179b76",
+    "project": "termmax",
+    "symbol": "USDC",
+    "poolMeta": "Edge Capital UltraYield",
+    "tvlUsd": 73783
+  },
+  {
+    "pool": "4e0c61f2-c8e0-43dc-b593-056f6229adf9",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - EDGE-USDC",
+    "tvlUsd": 73779
+  },
+  {
+    "pool": "77143065-ddb5-4cc8-893f-aefb021ad837",
+    "project": "fluid-lending",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 70743
+  },
+  {
+    "pool": "e90d32fc-87ee-4583-834e-42d08f97a7ac",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - edgeUSDC",
+    "tvlUsd": 67687
+  },
+  {
+    "pool": "5f677cd6-6b95-44c0-9961-485f8724b1a1",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - AlphaUSDCv2",
+    "tvlUsd": 66128
+  },
+  {
+    "pool": "03db161f-df2e-4393-b0c5-14762432d133",
+    "project": "yearn-finance",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 65122
+  },
+  {
+    "pool": "4f56e1a9-e480-40cc-b8cc-0bdbcaa8dc5d",
+    "project": "peapods-finance",
+    "symbol": "USDC",
+    "poolMeta": "Peapods Interest Bearing USDC - 33",
+    "tvlUsd": 62309
+  },
+  {
+    "pool": "6bdb6875-463f-4e17-841c-35e480d5e90a",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - agUSDC",
+    "tvlUsd": 60040
+  },
+  {
+    "pool": "2243105b-f271-4ab4-a8ba-323e31ff99ad",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - 9SUSDC11Core",
+    "tvlUsd": 58138
+  },
+  {
+    "pool": "fd262370-3fda-419f-bf15-c7b5678f1394",
+    "project": "beefy",
+    "symbol": "USDC",
+    "poolMeta": "Morpho",
+    "tvlUsd": 55214
+  },
+  {
+    "pool": "1418e2ea-9a7f-44ff-b4b2-09e22fc22a61",
+    "project": "smartcredit",
+    "symbol": "USDC",
+    "poolMeta": "30-90 days",
+    "tvlUsd": 53547
+  },
+  {
+    "pool": "84f196f1-cf71-4df0-a169-ca5922c81f99",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - DuplicatedKey.USDC",
+    "tvlUsd": 53222
+  },
+  {
+    "pool": "bb652447-0b50-4dff-9375-30e7e826db68",
+    "project": "aave-v4",
+    "symbol": "USDC",
+    "poolMeta": "plus",
+    "tvlUsd": 49994
+  },
+  {
+    "pool": "b4837e13-ecb2-4fa9-9b43-f794a601c533",
+    "project": "silo-v2",
+    "symbol": "USDC",
+    "poolMeta": "182",
+    "tvlUsd": 47898
+  },
+  {
+    "pool": "c2505d0e-aced-431f-a3cd-b4b503301b09",
+    "project": "euler-v2",
+    "symbol": "USDC",
+    "poolMeta": "Hyperithm Euler USDC",
+    "tvlUsd": 46531
+  },
+  {
+    "pool": "a9a02e70-279f-4a78-8abc-61bf7b044da1",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - JULIANUSDC",
+    "tvlUsd": 45900
+  },
+  {
+    "pool": "9e0bb672-3329-47f2-a95f-39ba13759927",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - csUSDC",
+    "tvlUsd": 45432
+  },
+  {
+    "pool": "797f9dfd-4c55-4346-8cc5-178db9b8312c",
+    "project": "silo-v2",
+    "symbol": "USDC",
+    "poolMeta": "170",
+    "tvlUsd": 42855
+  },
+  {
+    "pool": "4059659c-a240-47c3-85a5-69897563d63b",
+    "project": "euler-v2",
+    "symbol": "USDC",
+    "poolMeta": "EVK Vault eUSDC-37",
+    "tvlUsd": 40782
+  },
+  {
+    "pool": "bd15a76e-cbef-4161-8620-38e63d45025d",
+    "project": "zerobase-cedefi",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 40085
+  },
+  {
+    "pool": "c51c62d0-123e-4ff6-9c03-b451028afc2c",
+    "project": "peapods-finance",
+    "symbol": "USDC",
+    "poolMeta": "Peapods Interest Bearing USDC - 54",
+    "tvlUsd": 39174
+  },
+  {
+    "pool": "e0a73b02-748b-4ac8-8a5a-1c8d110f1a80",
+    "project": "euler-v2",
+    "symbol": "USDC",
+    "poolMeta": "EVK Vault eUSDC-75",
+    "tvlUsd": 32608
+  },
+  {
+    "pool": "5b43a732-d2a3-4860-ae64-b14766cb85d1",
+    "project": "clearpool-lending",
+    "symbol": "USDC",
+    "poolMeta": "USDC (Alphanonce)",
+    "tvlUsd": 31318
+  },
+  {
+    "pool": "3313ec0f-ed24-4d37-bdf8-9b26264785a4",
+    "project": "silo-v2",
+    "symbol": "USDC",
+    "poolMeta": "178",
+    "tvlUsd": 29919
+  },
+  {
+    "pool": "6ad8fcb4-ce16-4e8a-b1f5-1f4e2352cb29",
+    "project": "beefy",
+    "symbol": "USDC",
+    "poolMeta": "Morpho",
+    "tvlUsd": 28524
+  },
+  {
+    "pool": "e07afc3c-b154-42a4-a543-bdca0591b53e",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - reUSDC",
+    "tvlUsd": 25772
+  },
+  {
+    "pool": "05cef463-9272-4f3c-bd16-05b0c65f283e",
+    "project": "peapods-finance",
+    "symbol": "USDC",
+    "poolMeta": "Peapods Interest Bearing USDC - 35",
+    "tvlUsd": 24979
+  },
+  {
+    "pool": "f087b98a-9c41-4167-b7c8-fdca501feb19",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - aprUSDC",
+    "tvlUsd": 21603
+  },
+  {
+    "pool": "dcd35b19-aaf6-486e-ada7-fba8767ab757",
+    "project": "dforce-lending",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 19949
+  },
+  {
+    "pool": "fe06e98b-aec5-4bcf-b67d-9e154cb1016b",
+    "project": "termmax",
+    "symbol": "USDC",
+    "poolMeta": "TermMax USDC Vault",
+    "tvlUsd": 18984
+  },
+  {
+    "pool": "b980ce92-881c-4ec7-9ae8-40d0f7f3a1cc",
+    "project": "mover",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 15909
+  },
+  {
+    "pool": "1dbb8d34-f29a-458b-8850-83399278fe06",
+    "project": "yearn-finance",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 15739
+  },
+  {
+    "pool": "83e31753-d9b7-41cb-b9bb-6512c5aa2d38",
+    "project": "harvest-finance",
+    "symbol": "USDC",
+    "poolMeta": "Morpho - Clearstar Core V2",
+    "tvlUsd": 15473
+  },
+  {
+    "pool": "498591ea-eecd-47b9-84c5-c2475d67795d",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - steakUSDCrwa",
+    "tvlUsd": 14491
+  },
+  {
+    "pool": "450a185a-6a2a-41f2-9486-4ba7b3bc29db",
+    "project": "termmax",
+    "symbol": "USDC",
+    "poolMeta": "InfiniFi USDC Vault",
+    "tvlUsd": 14200
+  },
+  {
+    "pool": "9c0081d2-7f85-4cb1-a1f8-776dc004e47a",
+    "project": "merkl",
+    "symbol": "USDC",
+    "poolMeta": "LEND - REUSDCVAULT",
+    "tvlUsd": 13096
+  },
+  {
+    "pool": "944111ae-680a-43d0-802a-38ddf362f5ac",
+    "project": "fusion-by-ipor",
+    "symbol": "USDC",
+    "poolMeta": "Bitcoin Dollar USDC",
+    "tvlUsd": 12849
+  },
+  {
+    "pool": "f6c2fec8-dd63-4163-bd53-04b8ac48266e",
+    "project": "compound-v3",
+    "symbol": "USDC",
+    "poolMeta": "ETH-pool",
+    "tvlUsd": 12455
+  },
+  {
+    "pool": "96c80325-f7c3-40a6-a4e0-81a9b9d9dd92",
+    "project": "clearpool-lending",
+    "symbol": "USDC",
+    "poolMeta": "USDC (Wintermute)",
+    "tvlUsd": 12441
+  },
+  {
+    "pool": "2b6fe6b0-62ba-4c76-9994-47f09875a421",
+    "project": "fringe-v1",
+    "symbol": "USDC",
+    "poolMeta": "V1 markets",
+    "tvlUsd": 11699
+  },
+  {
+    "pool": "46e24837-806f-4c30-8836-946b14092b0b",
+    "project": "fusion-by-ipor",
+    "symbol": "USDC",
+    "poolMeta": "Autopilot USDC Ethereum",
+    "tvlUsd": 10304
+  },
+  {
+    "pool": "4b9c4bd7-1c56-4fbb-a2d0-d77b3effab70",
+    "project": "harvest-finance",
+    "symbol": "USDC",
+    "poolMeta": "Autopilot",
+    "tvlUsd": 10301
+  },
+  {
+    "pool": "832b6531-a90a-43bc-bdf1-efd720db16b6",
+    "project": "primex-finance",
+    "symbol": "USDC",
+    "poolMeta": null,
+    "tvlUsd": 10076
+  }
+]
