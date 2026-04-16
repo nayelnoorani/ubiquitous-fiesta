@@ -1,5 +1,6 @@
 /data/
 /models/
+/presentations/
 .env
 keys.md
 __pycache__/
