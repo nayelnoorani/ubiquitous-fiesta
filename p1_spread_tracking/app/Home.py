@@ -6,98 +6,148 @@ st.set_page_config(
     layout="wide",
 )
 
-st.title("Aave V3 vs Compound V3")
-st.subheader("USDC Borrow Rate Spread Analysis")
 
-st.markdown("""
-How closely do Aave and Compound track each other on the same asset?
-For USDC on Ethereum, this project examines 1,159 days of borrow rate history to ask:
-do the two protocols move in lockstep — and when they diverge, how fast does arbitrage close the gap?
-""")
-
-st.markdown("---")
-
-# ── Key findings ──────────────────────────────────────────────────────────────
-st.markdown("### Key Findings")
-
-col1, col2, col3 = st.columns(3)
-
-with col1:
-    st.metric(
-        "Cointegration", "Confirmed", "p = 0.0",
-        help="Engle-Granger test stat = −5.32, clears the 1% critical value (−3.91). "
-             "The two protocols share a long-run equilibrium — the spread cannot drift apart permanently.",
-    )
-    st.metric(
-        "Spread half-life", "0.95 days",
-        help="Ornstein-Uhlenbeck estimate. Spread shocks decay 50% within a single day on average. "
-             "New shocks (σ = 2.7% daily) arrive faster than old ones close.",
+def placeholder(description: str) -> None:
+    st.markdown(
+        f'<div style="border:1px dashed rgba(180,180,180,0.3);border-radius:6px;'
+        f'padding:2rem;margin:0.5rem 0;text-align:center;'
+        f'color:rgba(200,200,200,0.5);font-style:italic;">'
+        f'[ {description} ]</div>',
+        unsafe_allow_html=True,
     )
 
-with col2:
-    st.metric(
-        "Mean 30-day rolling correlation", "0.27",
-        help="Despite long-run cointegration, the protocols move largely independently day-to-day. "
-             "74% of days the rolling correlation sits below 0.50; it reaches −0.70 at times.",
-    )
-    st.metric(
-        "Spread episodes > 1%", "144 events",
-        help="Mean duration 3.3 days, max 27 days. 92.5% of episodes close within 7 days. "
-             "Almost always calm, occasionally explosive.",
-    )
 
-with col3:
-    st.metric(
-        "Compound net cost advantage", "−32 bps avg",
-        help="COMP rewards (avg 0.43%) are paid to borrowers, reducing Compound's effective rate. "
-             "Aave is the more expensive protocol on 55% of days once rewards are accounted for.",
-    )
-    st.metric(
-        "Direction prediction AUC", "0.671",
-        help="Logistic regression (Q1S7). Spread direction is weakly but genuinely predictable. "
-             "Signal is almost entirely captured by today's Aave rate change and spread level. "
-             "Tree models do not improve on the linear baseline.",
+# ── Section 1: Opening Frame ──────────────────────────────────────────────────
+
+col_text, col_visual = st.columns([2, 3])
+
+with col_text:
+    st.markdown(
+        "<p style='font-size:1.25rem;line-height:1.7;padding-top:1rem;'>"
+        "I've spent ten years analyzing interest rates in traditional finance. "
+        "I came to DeFi with five reasonable hypotheses — the data overturned four of them."
+        "</p>",
+        unsafe_allow_html=True,
     )
 
-st.markdown("---")
-
-# ── Dataset ───────────────────────────────────────────────────────────────────
-st.markdown("### Dataset")
-
-col1, col2 = st.columns(2)
-
-with col1:
+with col_visual:
     st.markdown("""
-| | Aave V3 | Compound V3 |
-|---|---|---|
-| Pool | Main market | Main market |
-| Avg TVL | \\$397M | \\$60M |
-| Records | 1,163 | 1,282 |
-| Start date | 2023-02-06 | 2022-10-06 |
-| **Overlapping window** | **1,159 days** | **1,159 days** |
-""")
-
-with col2:
-    st.markdown("""
-**Source:** DefiLlama Yields API — no authentication required
-
-**Rate comparison rule:**
-Aave `apyBase` vs Compound `apyBase − apyReward`
-
-COMP token rewards are paid directly to borrowers, reducing their effective borrow cost.
-Comparing raw base rates would overstate Compound's cost by ~43 bps on average.
-Aave offers no reward programme on this pool.
+| Hypothesis | Verdict |
+|:---|:---:|
+| Large liquidity flows drive rate divergence between protocols | ❌ |
+| Spreads are harder to close after a rate spike | ❌ |
+| Friday spreads get locked in over the weekend | ❌ |
+| The bigger protocol moves first; the smaller one follows | ❌ |
+| Yesterday's spread tells you something about tomorrow's | ⚠️ |
 """)
 
 st.markdown("---")
 
-# ── Navigation guide ──────────────────────────────────────────────────────────
-st.markdown("### Pages")
+# ── Section 2: What Was Actually True ────────────────────────────────────────
 
-st.markdown("""
-| Page | Content |
-|---|---|
-| **Explore the Data** | Interactive rate and spread charts, TVL, rolling correlation, episode browser |
-| **Model & Statistical Results** | Q1 main study + 7 supplementary analyses — statistics, ML model performance, interpretations |
-| **How I Built This** | Data pipeline, feature engineering decisions, modelling choices, stack |
-""")
+st.markdown("## \"The market is more efficient than I expected, and stranger.\"")
+st.markdown("*Arbitrage is alive. It's just constantly overwhelmed.*")
+
+st.markdown("<br>", unsafe_allow_html=True)
+
+# Card 1 — stat LEFT, text RIGHT
+c_stat, c_text = st.columns([1, 2])
+with c_stat:
+    st.markdown("# **p = 0.0**")
+    st.caption("Engle-Granger cointegration test")
+with c_text:
+    st.markdown(
+        "Aave and Compound share a long-run equilibrium that neither protocol can permanently escape. "
+        "No matter how far rates diverge, the market always closes the gap."
+    )
+
+st.markdown("<br>", unsafe_allow_html=True)
+
+# Card 2 — stat RIGHT, text LEFT
+c_text, c_stat = st.columns([2, 1])
+with c_text:
+    st.markdown(
+        "The typical spread shock loses half its size within a single trading day. "
+        "That's not slow arbitrage — that's near-instantaneous price discovery for a market that never closes."
+    )
+with c_stat:
+    st.markdown("# **0.95 days**")
+    st.caption("Ornstein-Uhlenbeck half-life")
+
+st.markdown("<br>", unsafe_allow_html=True)
+
+# Card 3 — stat LEFT, text RIGHT
+c_stat, c_text = st.columns([1, 2])
+with c_stat:
+    st.markdown("# **0.19%**")
+    st.caption("Median daily spread")
+with c_text:
+    st.markdown(
+        "On a typical day, borrowing on Aave costs virtually the same as borrowing on Compound. "
+        "The volatility that dominates the statistics lives almost entirely in rare, short-lived spikes."
+    )
+
+st.markdown("<br>", unsafe_allow_html=True)
+
+# Card 4 — stat RIGHT, text LEFT
+c_text, c_stat = st.columns([2, 1])
+with c_text:
+    st.markdown(
+        "When spreads do blow out, they almost always close within a week. "
+        "The larger the gap, the stronger the pull back toward equilibrium — "
+        "stress doesn't break the market, it accelerates it."
+    )
+with c_stat:
+    st.markdown("# **92.5%**")
+    st.caption("Spike episodes resolved within 7 days")
+
+st.markdown("---")
+
+# ── Section 3: Five Things I Was Wrong About ──────────────────────────────────
+
+st.markdown("## Five Things I Was Wrong About")
+st.markdown("*Well, I got one. Kinda.*")
+
+st.markdown("<br>", unsafe_allow_html=True)
+
+cards = [
+    {
+        "hypothesis": "Large liquidity flows drive rate divergence between protocols",
+        "verdict": "❌",
+        "stat": "4×",
+        "finding": "Outflows are 4× more impactful than inflows — and the causality runs backwards.",
+    },
+    {
+        "hypothesis": "Spreads are harder to close after a rate spike",
+        "verdict": "❌",
+        "stat": "0.87 days",
+        "finding": "Spreads close faster post-spike, not slower. Stress accelerates arbitrage.",
+    },
+    {
+        "hypothesis": "Friday spreads get locked in over the weekend",
+        "verdict": "❌",
+        "stat": "68.5%",
+        "finding": "Friday spreads are less persistent into Monday than any mid-week transition.",
+    },
+    {
+        "hypothesis": "The bigger protocol moves first; the smaller one follows",
+        "verdict": "❌",
+        "stat": "R² = 0.0002",
+        "finding": "Yesterday's Aave move explains essentially nothing about today's Compound move.",
+    },
+    {
+        "hypothesis": "Yesterday's spread tells you something about tomorrow's",
+        "verdict": "⚠️",
+        "stat": "6.4%",
+        "finding": "The level is nearly unpredictable. But the direction has a weak signal worth knowing.",
+    },
+]
+
+cols = st.columns(5)
+for col, card in zip(cols, cards):
+    with col:
+        st.markdown(f"**{card['hypothesis']}**")
+        st.markdown(f"### {card['verdict']}")
+        st.markdown(f"## {card['stat']}")
+        st.markdown(card["finding"])
+        st.page_link("pages/3_Model_Results.py", label="See full analysis →")

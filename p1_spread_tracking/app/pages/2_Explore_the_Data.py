@@ -3,182 +3,173 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-import pandas as pd
-import plotly.graph_objects as go
-import plotly.express as px
 import streamlit as st
 
-from utils.data import AAVE_COLOR, COMPOUND_COLOR, SPREAD_COLOR, get_episodes, load_wide
-
 st.set_page_config(page_title="Explore the Data", layout="wide")
-st.title("Explore the Data")
 
-wide = load_wide()
-episodes = get_episodes(1.0)
 
-# ── Date range filter (sidebar) ───────────────────────────────────────────────
-st.sidebar.header("Date range")
-min_date = wide.index.min().date()
-max_date = wide.index.max().date()
+def placeholder(description: str) -> None:
+    st.markdown(
+        f'<div style="border:1px dashed rgba(180,180,180,0.3);border-radius:6px;'
+        f'padding:2rem;margin:0.5rem 0;text-align:center;'
+        f'color:rgba(200,200,200,0.5);font-style:italic;">'
+        f'[ {description} ]</div>',
+        unsafe_allow_html=True,
+    )
 
-start_date = st.sidebar.date_input("From", min_date, min_value=min_date, max_value=max_date)
-end_date   = st.sidebar.date_input("To",   max_date, min_value=min_date, max_value=max_date)
 
-mask = (wide.index.date >= start_date) & (wide.index.date <= end_date)
-w = wide.loc[mask]
+# ── Section 1: Opening Hook ───────────────────────────────────────────────────
 
-# ── 1. Borrow rates ───────────────────────────────────────────────────────────
-st.markdown("### Borrow Rates Over Time")
-st.caption("Aave `apyBase` vs Compound effective rate (`apyBase − apyReward`). "
-           "Compound rewards reduce borrower cost — this is the fair comparison.")
+st.markdown("## Compound looks more expensive. It isn't.")
 
-fig_rates = go.Figure()
-fig_rates.add_trace(go.Scatter(
-    x=w.index, y=w["aave_apyBase"],
-    name="Aave V3",
-    line=dict(color=AAVE_COLOR, width=1.5),
-    hovertemplate="%{x|%Y-%m-%d}<br>Aave: %{y:.2f}%<extra></extra>",
-))
-fig_rates.add_trace(go.Scatter(
-    x=w.index, y=w["compound_net"],
-    name="Compound V3 (net)",
-    line=dict(color=COMPOUND_COLOR, width=1.5),
-    hovertemplate="%{x|%Y-%m-%d}<br>Compound net: %{y:.2f}%<extra></extra>",
-))
-fig_rates.update_layout(
-    yaxis_title="APY (%)",
-    hovermode="x unified",
-    height=360,
-    margin=dict(t=10, b=10),
-    legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="left", x=0),
+col_left, col_right = st.columns(2)
+
+with col_left:
+    st.markdown("**The headline view**")
+    placeholder(
+        "Left panel — two large numbers: Aave 4.87% / Compound 4.99% · "
+        "Label: Mean base borrow rate · Implication: Compound looks pricier"
+    )
+
+with col_right:
+    st.markdown("**The full picture**")
+    placeholder(
+        "Right panel — two large numbers: Aave more expensive on 55% of days / "
+        "Compound more expensive on 45% of days · "
+        "Label: Days cheaper, net of COMP rewards · "
+        "Implication: Aave is the pricier protocol most of the time"
+    )
+
+st.markdown(
+    "Compound pays COMP token rewards directly to borrowers, reducing their effective cost by "
+    "43 basis points on average. The protocol that looks more expensive by headline rate is "
+    "actually the cheaper place to borrow on most days."
 )
-st.plotly_chart(fig_rates, use_container_width=True)
 
-# ── 2. Spread over time ───────────────────────────────────────────────────────
-st.markdown("### Spread Over Time")
-st.caption("Positive = Aave is more expensive. Shaded bands = episodes where |spread| > 1%.")
+st.markdown("---")
 
-fig_spread = go.Figure()
+# ── Section 2: The Two Rate Series ───────────────────────────────────────────
 
-# Shade episode regions that fall within the filtered window
-ep_in_window = episodes[
-    (pd.to_datetime(episodes["End"]) >= pd.to_datetime(start_date)) &
-    (pd.to_datetime(episodes["Start"]) <= pd.to_datetime(end_date))
-]
-for _, ep in ep_in_window.iterrows():
-    fig_spread.add_vrect(
-        x0=str(ep["Start"]), x1=str(ep["End"]),
-        fillcolor="rgba(240,178,122,0.18)",
-        layer="below", line_width=0,
-        annotation_text="", annotation_position="top left",
-    )
+st.markdown("## Same asset. Same chain. Very different moments.")
 
-fig_spread.add_hline(y=0, line_dash="dash", line_color="rgba(255,255,255,0.3)", line_width=1)
-fig_spread.add_trace(go.Scatter(
-    x=w.index, y=w["spread_vs_net"],
-    name="Spread",
-    line=dict(color=SPREAD_COLOR, width=1.2),
-    fill="tozeroy",
-    fillcolor="rgba(240,178,122,0.06)",
-    hovertemplate="%{x|%Y-%m-%d}<br>Spread: %{y:.2f}%<extra></extra>",
-))
-fig_spread.update_layout(
-    yaxis_title="Spread (%)",
-    hovermode="x unified",
-    height=300,
-    margin=dict(t=10, b=10),
-    showlegend=False,
+st.markdown(
+    "Sam Savage called it the Flaw of Averages — a plan built on average assumptions will fail "
+    "on average. Aave's mean borrow rate is 4.87%. Its maximum was 56.7%. Use the toggle to see "
+    "why the average is the wrong number to watch."
 )
-st.plotly_chart(fig_spread, use_container_width=True)
 
-# ── 3. Rolling 30-day correlation ─────────────────────────────────────────────
-st.markdown("### 30-Day Rolling Correlation")
-st.caption("Despite long-run cointegration, the protocols correlate at only 0.27 on average "
-           "and go negative at times — they respond to different short-term demand signals.")
+col_t1, col_t2 = st.columns(2)
+with col_t1:
+    rate_toggle = st.radio(
+        "Rate view",
+        ["Base rates", "Net cost (incl. COMP rewards)"],
+        horizontal=True,
+    )
+with col_t2:
+    scale_toggle = st.radio(
+        "Y-axis scale",
+        ["Capped (0–15%)", "Full scale"],
+        horizontal=True,
+    )
 
-fig_corr = go.Figure()
-fig_corr.add_hline(y=0,    line_dash="dash", line_color="rgba(255,255,255,0.25)", line_width=1)
-fig_corr.add_hline(
-    y=0.2693,
-    line_dash="dot", line_color="rgba(255,255,255,0.5)", line_width=1,
-    annotation_text="mean 0.27", annotation_position="top right",
+placeholder(
+    "Line chart — Aave base rate vs Compound (base or net depending on toggle) · "
+    "Shaded area between the two lines showing the spread · "
+    "Capped view: Y-axis max 15%, note showing count of days exceeding range · "
+    "Full scale: reveals spike magnitude · "
+    "Annotations: Aave max spike 56.7%, Compound max spike 22.4%"
 )
-fig_corr.add_trace(go.Scatter(
-    x=w.index, y=w["rolling_corr_30d"],
-    name="30-day correlation",
-    line=dict(color="#636EFA", width=1.5),
-    fill="tozeroy",
-    fillcolor="rgba(99,110,250,0.08)",
-    hovertemplate="%{x|%Y-%m-%d}<br>Corr: %{y:.3f}<extra></extra>",
-))
-fig_corr.update_layout(
-    yaxis_title="Correlation",
-    yaxis_range=[-1, 1],
-    hovermode="x unified",
-    height=280,
-    margin=dict(t=10, b=10),
-    showlegend=False,
+
+st.markdown("---")
+
+# ── Section 3: The Spread Distribution ───────────────────────────────────────
+
+st.markdown("## The spread is almost nothing. Until it isn't.")
+
+st.markdown(
+    "The median daily spread between Aave and Compound is 0.19% — on most days, the two "
+    "protocols are essentially identical. But a kurtosis of 126.7 means the tails are extreme: "
+    "when spreads move, they move violently."
 )
-st.plotly_chart(fig_corr, use_container_width=True)
 
-# ── 4. TVL + Spread distribution ──────────────────────────────────────────────
-col1, col2 = st.columns(2)
+col_hist, col_stats = st.columns([3, 2])
 
-with col1:
-    st.markdown("### TVL Over Time")
-    st.caption("Aave holds ~6.6× more TVL, which explains its sharper rate spikes.")
-    fig_tvl = go.Figure()
-    fig_tvl.add_trace(go.Scatter(
-        x=w.index, y=w["aave_tvlUsd"] / 1e6,
-        name="Aave V3", line=dict(color=AAVE_COLOR, width=1.5),
-        hovertemplate="%{x|%Y-%m-%d}<br>Aave TVL: $%{y:.0f}M<extra></extra>",
-    ))
-    fig_tvl.add_trace(go.Scatter(
-        x=w.index, y=w["compound_tvlUsd"] / 1e6,
-        name="Compound V3", line=dict(color=COMPOUND_COLOR, width=1.5),
-        hovertemplate="%{x|%Y-%m-%d}<br>Compound TVL: $%{y:.0f}M<extra></extra>",
-    ))
-    fig_tvl.update_layout(
-        yaxis_title="TVL ($M)",
-        hovermode="x unified",
-        height=300,
-        margin=dict(t=10, b=10),
-        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="left", x=0),
+with col_hist:
+    placeholder(
+        "Histogram of daily spread values with a normal distribution overlay · "
+        "The normal curve appears as a thin symmetrical bell barely visible above zero "
+        "compared to the actual spike-dominated shape · "
+        "Two callouts: Median 0.19% and Kurtosis 126.7 (note: normal distribution = 3)"
     )
-    st.plotly_chart(fig_tvl, use_container_width=True)
 
-with col2:
-    st.markdown("### Spread Distribution")
-    st.caption("Clipped to ±10% for readability. Actual range: −18.8% to +52.9%.")
-    clipped = w["spread_vs_net"].clip(-10, 10)
-    median_val = w["spread_vs_net"].median()
-    fig_hist = px.histogram(
-        clipped, nbins=80,
-        color_discrete_sequence=[SPREAD_COLOR],
-        labels={"value": "Spread (%)"},
+with col_stats:
+    st.markdown("&nbsp;", unsafe_allow_html=True)
+    st.markdown("### **144**")
+    st.caption("episodes above 1%")
+    st.markdown("### **3.3 days**")
+    st.caption("mean episode duration")
+    st.markdown("### **27 days**")
+    st.caption("longest episode")
+    st.markdown("### **3.9%**")
+    st.caption("mean peak spread")
+    st.markdown("### **54.2%**")
+    st.caption("maximum peak spread")
+
+st.markdown("**Episode browser**")
+
+col_f1, col_f2 = st.columns(2)
+with col_f1:
+    min_peak = st.slider("Minimum peak spread (%)", 1.0, 20.0, 1.0, 0.5)
+with col_f2:
+    min_dur = st.slider("Minimum duration (days)", 1, 14, 1)
+
+placeholder(
+    f"Filterable table of spread episodes where |spread| > 1% · "
+    f"Filtered to: peak >= {min_peak}%, duration >= {min_dur} day(s) · "
+    f"Columns: start date, duration, peak spread"
+)
+
+st.markdown("---")
+
+# ── Section 4: The Rolling Correlation Puzzle ─────────────────────────────────
+
+st.markdown("## Aave & Compound rates: Linked over years. Strangers in any given month.")
+
+st.markdown(
+    "Aave and Compound offer the same product — USDC borrowing — on the same blockchain, "
+    "so it is reasonable to expect their rates track closely. Cointegration confirms a long-run "
+    "structural link: the two series share an equilibrium they never permanently escape. Yet a "
+    "mean 30-day rolling correlation of 0.27 says they spend most of their time ignoring each "
+    "other getting there."
+)
+
+col_chart, col_stats = st.columns([3, 1])
+
+with col_chart:
+    placeholder(
+        "Line chart of 30-day rolling Pearson correlation over full 1,159-day window · "
+        "Y-axis: −1 to +1 · "
+        "Three horizontal reference lines: 0 (labeled), 0.27 (mean, labeled), 0.50 (moderate correlation) · "
+        "Shaded red: periods where correlation is negative · "
+        "Shaded green: periods where correlation exceeds 0.50"
     )
-    fig_hist.add_vline(
-        x=median_val,
-        line_dash="dash", line_color="white", line_width=1.5,
-        annotation_text=f"median {median_val:.2f}%",
-        annotation_position="top right",
-    )
-    fig_hist.update_layout(
-        xaxis_title="Spread (%)", yaxis_title="Days",
-        showlegend=False,
-        height=300,
-        margin=dict(t=10, b=10),
-    )
-    st.plotly_chart(fig_hist, use_container_width=True)
 
-# ── 5. Episode browser ────────────────────────────────────────────────────────
-st.markdown("### Spread Episodes  —  |spread| > 1%")
-st.caption(f"{len(episodes)} episodes detected over the full sample. "
-           "Mean duration 3.3 days · Max 27 days · Mean peak 3.9%")
+with col_stats:
+    st.markdown("&nbsp;", unsafe_allow_html=True)
+    st.markdown("### **0.27**")
+    st.caption("Mean")
+    st.markdown("### **−0.70**")
+    st.caption("Min")
+    st.markdown("### **0.88**")
+    st.caption("Max")
+    st.markdown("### **74.3%**")
+    st.caption("% of days below 0.50")
 
-ep_display = episodes[
-    (pd.to_datetime(episodes["Start"]) >= pd.to_datetime(start_date)) &
-    (pd.to_datetime(episodes["End"])   <= pd.to_datetime(end_date))
-].reset_index(drop=True)
+st.markdown("---")
 
-st.dataframe(ep_display, use_container_width=True, hide_index=True)
+# ── Section 5: Data Quality Note ─────────────────────────────────────────────
+
+st.caption(
+    "Aave's reward column is null for all 1,163 records — not missing data, but a structural "
+    "fact: Aave runs no token incentive programme on this pool."
+)
