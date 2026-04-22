@@ -18,7 +18,8 @@ wide = load_wide()
 
 PANEL_BG = "rgba(26,29,35,0.0)"
 GRID_COLOR = "rgba(255,255,255,0.06)"
-AXIS_COLOR = "rgba(255,255,255,0.2)"
+AXIS_LINE_COLOR = "rgba(255,255,255,0.2)"
+AXIS_TICK_COLOR = "rgba(255,255,255,0.85)"
 
 
 def big_number(value: str, label: str, sub: str = "") -> None:
@@ -53,13 +54,13 @@ def base_layout(fig: go.Figure, yrange=None) -> go.Figure:
     )
     fig.update_xaxes(
         gridcolor=GRID_COLOR,
-        linecolor=AXIS_COLOR,
-        tickfont_color=AXIS_COLOR,
+        linecolor=AXIS_LINE_COLOR,
+        tickfont_color=AXIS_TICK_COLOR,
     )
     fig.update_yaxes(
         gridcolor=GRID_COLOR,
-        linecolor=AXIS_COLOR,
-        tickfont_color=AXIS_COLOR,
+        linecolor=AXIS_LINE_COLOR,
+        tickfont_color=AXIS_TICK_COLOR,
         range=yrange,
     )
     return fig
@@ -73,7 +74,7 @@ col_left, col_right = st.columns(2)
 
 with col_left:
     st.markdown(
-        "<p style='font-size:0.75rem;letter-spacing:0.08em;text-transform:uppercase;"
+        "<p style='font-size:1.5rem;letter-spacing:0.08em;text-transform:uppercase;"
         "color:rgba(250,250,250,0.45);margin-bottom:0.5rem;'>The headline view</p>",
         unsafe_allow_html=True,
     )
@@ -86,7 +87,7 @@ with col_left:
 
 with col_right:
     st.markdown(
-        "<p style='font-size:0.75rem;letter-spacing:0.08em;text-transform:uppercase;"
+        "<p style='font-size:1.5rem;letter-spacing:0.08em;text-transform:uppercase;"
         "color:rgba(250,250,250,0.45);margin-bottom:0.5rem;'>The full picture</p>",
         unsafe_allow_html=True,
     )
@@ -155,7 +156,7 @@ fig_rates.add_trace(go.Scatter(
     fill="tonexty",
     fillcolor="rgba(240,178,122,0.15)",
     mode="lines",
-    line=dict(color=COMPOUND_COLOR, width=1.5),
+    line=dict(color=f"rgba(0,211,149,0.75)", width=1.5),
     name=compound_label,
 ))
 
@@ -252,7 +253,7 @@ with col_hist:
 
     base_layout(fig_hist)
     fig_hist.update_layout(
-        height=320,
+        height=440,
         xaxis_title="Spread (%)",
         yaxis_title="Count",
         barmode="overlay",
