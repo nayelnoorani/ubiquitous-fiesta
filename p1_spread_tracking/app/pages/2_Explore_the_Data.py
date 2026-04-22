@@ -213,7 +213,8 @@ with col_hist:
     # Normal distribution overlay scaled to histogram
     mu, sigma = spread.mean(), spread.std()
     x_norm = np.linspace(spread.min(), spread.max(), 400)
-    y_norm = stats.norm.pdf(x_norm, mu, sigma) * len(spread) * bin_width
+    pdf_vals = stats.norm.pdf(x_norm, mu, sigma)
+    y_norm = pdf_vals * (hist_vals.max() / pdf_vals.max())
 
     fig_hist = go.Figure()
     fig_hist.add_trace(go.Bar(
