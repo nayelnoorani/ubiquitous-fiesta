@@ -101,8 +101,8 @@ with col_right:
 
 st.markdown(
     "Compound pays COMP token rewards directly to borrowers, reducing their effective cost by "
-    "43 basis points on average. The protocol that looks more expensive by headline rate is "
-    "actually the cheaper place to borrow on most days."
+    "43 basis points on average. Compound is actually the cheaper place to borrow on most days — "
+    "which is why every spread in this analysis is calculated net of rewards, not off the headline rate."
 )
 
 st.markdown("---")
@@ -112,9 +112,9 @@ st.markdown("---")
 st.markdown("## Same asset. Same chain. Very different moments.")
 
 st.markdown(
-    "Sam Savage called it the Flaw of Averages — a plan built on average assumptions will fail "
-    "on average. Aave's mean borrow rate is 4.87%. Its maximum was 56.7%. Use the toggle to see "
-    "why the average is the wrong number to watch."
+    "A plan built on average assumptions will fail on average — Aave's mean borrow rate is 4.87%, "
+    "but its maximum was 56.7%. The chart is capped by default to keep the normal range readable; "
+    "switching to full scale shows what the average is hiding."
 )
 
 col_t1, col_t2 = st.columns(2)
@@ -271,6 +271,12 @@ with col_stats:
     big_number("3.9%", "mean peak spread", compact=True)
     big_number("54.2%", "maximum peak spread", compact=True)
 
+st.markdown(
+    "The 144 episodes above aren't just a count — each one is a dated, measurable event. "
+    "Filter by peak spread or duration below to pull up the specific periods that dominate "
+    "the distribution on the left."
+)
+
 st.markdown("**Episode browser**")
 
 col_f1, col_f2 = st.columns(2)
@@ -307,7 +313,7 @@ st.markdown("## Aave & Compound rates: Linked over years. Strangers in any given
 
 st.markdown(
     "Aave and Compound offer the same product — USDC borrowing — on the same blockchain, "
-    "so it is reasonable to expect their rates track closely. Cointegration confirms a long-run "
+    "so you'd expect their rates to track closely. Cointegration confirms a long-run "
     "structural link: the two series share an equilibrium they never permanently escape. Yet a "
     "mean 30-day rolling correlation of 0.27 says they spend most of their time ignoring each "
     "other getting there."
