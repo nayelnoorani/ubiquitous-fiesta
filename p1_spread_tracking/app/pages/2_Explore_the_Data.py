@@ -253,7 +253,7 @@ with col_hist:
 
     base_layout(fig_hist)
     fig_hist.update_layout(
-        height=440,
+        height=600,
         xaxis_title="Spread (%)",
         yaxis_title="Count",
         barmode="overlay",
