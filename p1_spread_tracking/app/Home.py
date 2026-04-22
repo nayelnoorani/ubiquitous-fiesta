@@ -26,6 +26,9 @@ with col_text:
         "<p style='font-size:1.25rem;line-height:1.7;padding-top:1rem;'>"
         "I've spent ten years analyzing interest rates in traditional finance. "
         "I came to DeFi with five reasonable hypotheses — the data overturned four of them."
+        "</p>"
+        "<p style='font-size:1rem;line-height:1.7;color:rgba(250,250,250,0.55);font-style:italic;'>"
+        "Here's where each one landed."
         "</p>",
         unsafe_allow_html=True,
     )
@@ -47,6 +50,11 @@ st.markdown("---")
 
 st.markdown("## \"The market is more efficient than I expected, and stranger.\"")
 st.markdown("*Arbitrage is alive. It's just constantly overwhelmed.*")
+
+st.markdown(
+    "The hypotheses didn't fail because the market is broken — "
+    "they failed because it's faster and smarter than expected."
+)
 
 st.markdown("<br>", unsafe_allow_html=True)
 
@@ -108,6 +116,11 @@ st.markdown("---")
 st.markdown("## Five Things I Was Wrong About")
 st.markdown("*Well, I got one. Kinda.*")
 
+st.markdown(
+    "Each card is a belief I held going in, stated exactly as I held it — "
+    "the verdict is upfront, the full evidence is on page 3."
+)
+
 st.markdown("<br>", unsafe_allow_html=True)
 
 cards = [
@@ -127,7 +140,7 @@ cards = [
         "hypothesis": "Friday spreads get locked in over the weekend",
         "verdict": "❌",
         "stat": "68.5%",
-        "finding": "Friday spreads are less persistent into Monday than any mid-week transition.",
+        "finding": "Friday is the least sticky transition of the week — DeFi doesn't close for the weekend.",
     },
     {
         "hypothesis": "The bigger protocol moves first; the smaller one follows",
