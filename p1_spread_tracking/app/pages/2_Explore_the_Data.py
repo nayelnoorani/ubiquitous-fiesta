@@ -22,13 +22,14 @@ AXIS_LINE_COLOR = "rgba(255,255,255,0.2)"
 AXIS_TICK_COLOR = "rgba(255,255,255,0.85)"
 
 
-def big_number(value: str, label: str, sub: str = "") -> None:
-    sub_html = f"<p style='font-size:0.8rem;color:rgba(250,250,250,0.45);margin:0;'>{sub}</p>" if sub else ""
+def big_number(value: str, label: str, sub: str = "", compact: bool = False) -> None:
+    padding = "0.5rem 1rem" if compact else "1.25rem 1rem"
+    sub_html = f"<p style='font-size:1rem;color:rgba(250,250,250,0.45);margin:0;'>{sub}</p>" if sub else ""
     st.markdown(
         f"""
-        <div style='padding:1.25rem 1rem;'>
+        <div style='padding:{padding};'>
           <p style='font-size:2.6rem;font-weight:700;margin:0;line-height:1;'>{value}</p>
-          <p style='font-size:0.85rem;color:rgba(250,250,250,0.55);margin:0.35rem 0 0;'>{label}</p>
+          <p style='font-size:1.05rem;color:rgba(250,250,250,0.55);margin:0.35rem 0 0;'>{label}</p>
           {sub_html}
         </div>
         """,
@@ -264,11 +265,11 @@ with col_hist:
 
 with col_stats:
     st.markdown("&nbsp;", unsafe_allow_html=True)
-    big_number("144", "episodes above 1%")
-    big_number("3.3 days", "mean episode duration")
-    big_number("27 days", "longest episode")
-    big_number("3.9%", "mean peak spread")
-    big_number("54.2%", "maximum peak spread")
+    big_number("144", "episodes above 1%", compact=True)
+    big_number("3.3 days", "mean episode duration", compact=True)
+    big_number("27 days", "longest episode", compact=True)
+    big_number("3.9%", "mean peak spread", compact=True)
+    big_number("54.2%", "maximum peak spread", compact=True)
 
 st.markdown("**Episode browser**")
 
@@ -381,7 +382,9 @@ st.markdown("---")
 
 # ── Section 5: Data Quality Note ─────────────────────────────────────────────
 
-st.caption(
+st.markdown(
+    "<p style='font-size:1rem;color:rgba(250,250,250,0.45);'>"
     "Aave's reward column is null for all 1,163 records — not missing data, but a structural "
-    "fact: Aave runs no token incentive programme on this pool."
+    "fact: Aave runs no token incentive programme on this pool.</p>",
+    unsafe_allow_html=True,
 )
