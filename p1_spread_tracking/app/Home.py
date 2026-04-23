@@ -212,7 +212,7 @@ for col, card in zip(cols, cards):
                 <div style='font-size:0.9rem;color:rgba(250,250,250,0.6);
                 margin:0;line-height:1.4;'>{card['hypothesis']}</div>
               </div>
-              <div style='font-size:0.75rem;margin:0.4rem 0 0.15rem;text-align:center;'>{card['verdict']}</div>
+              <div style='font-size:0.75rem;margin:0.1rem 0 0.15rem;text-align:center;'>{card['verdict']}</div>
               <div style='font-size:2rem;font-weight:700;margin:0 0 0.5rem;
               line-height:1;text-align:center;'>{card['stat']}</div>
               <div style='font-size:0.9rem;color:rgba(250,250,250,0.7);margin:0 0 0.75rem;
