@@ -46,9 +46,13 @@ st.title("How I Built This")
 st.markdown("*The decisions, detours, and one result that looked perfect for thirty seconds.*")
 
 st.markdown(
-    "The traditional path to capital efficiency has a cover charge — save enough, then access "
-    "the vehicles that help you save more efficiently. DeFi drops it. I came in through that "
-    "door — with a rates background and no idea what I'd find."
+    "Traditional fixed income taught me how interest rates work — how policy decisions propagate "
+    "through markets, how credit spreads price risk, how duration shapes a portfolio. Applying "
+    "that knowledge to my own savings was where traditional finance drew a line: the vehicles "
+    "that compound capital efficiently come with a minimum ticket. Save enough first, then access "
+    "the tools. DeFi drops that barrier. I came in through that door — with a decade of rates "
+    "intuition, a blank slate on DeFi mechanics, and enough curiosity to measure what I found "
+    "rather than assume I understood it."
 )
 
 st.markdown("---")
@@ -81,10 +85,12 @@ with col_text:
         "returns to the same level."
     )
     st.markdown(
-        "Two standard tests were run to answer this — ADF and KPSS. They gave opposite answers. "
-        "ADF said the spread was stationary; KPSS said it wasn't. Both rejecting simultaneously "
-        "points to a specific diagnosis: trend-stationary, meaning the mean is slowly drifting "
-        "rather than fixed. That's an unsatisfying answer, so the analysis went further."
+        "Two standard tests were run to answer this — ADF and KPSS. ADF answered yes; KPSS "
+        "answered no. Each test approaches the question from a different angle, and when they "
+        "contradict each other like this, it usually means something specific is going on: the "
+        "mean is probably drifting slowly over time rather than anchored to a fixed level — not "
+        "collapsing into a trend, but not fully stable either. That's an unsatisfying answer, "
+        "so the analysis went further."
     )
     st.markdown(
         "A third test — Zivot-Andrews — was run to allow for a single abrupt shift in the mean. "
@@ -204,9 +210,18 @@ with col_text:
     st.markdown(
         "It decided quickly. Every rewards-adjusted feature correlated above 0.95 with its "
         "unadjusted equivalent. Compound's rewards are stable enough that both definitions carry "
-        "the same information. All unadjusted variants were dropped. Of the 22 features built, "
-        "10 survived selection."
+        "the same information. All seven base rate variants were dropped."
     )
+    st.markdown(
+        "Five more features were cut for a different reason: they barely changed over the dataset. "
+        "A feature that doesn't vary can't explain why the spread varies. Two cases stand out. "
+        "The spike flag — which marked days when either protocol's rate exceeded 10% — fired on "
+        "only 12% of days, making it almost always zero; any regime information it carried is "
+        "still present in the days-since-last-spike feature, which survived. And the COMP reward "
+        "as a standalone feature failed for the same reason the base rate variants did: if the "
+        "reward barely moves, it can't explain why the spread moves."
+    )
+    st.markdown("Of the 22 features built, 10 survived.")
 
 with col_visual:
     kept = [
@@ -266,7 +281,7 @@ st.markdown("---")
 
 # ── Section 4: The Tautology Catch ───────────────────────────────────────────
 
-st.markdown("## R² = 1.0 (not what it seems)")
+st.markdown("## The model got everything right. That was the problem.")
 
 col_text, col_visual = st.columns([3, 2])
 
