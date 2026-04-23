@@ -433,7 +433,7 @@ st.markdown("---")
 
 # ── Round 5 — Yesterday's Spread Tells You Something ─────────────────────────
 
-st.markdown("### Round 5 — Yesterday's Spread Tells You Something About Tomorrow's")
+st.markdown("### Round 5 — Today's Spread Tells You Something About Tomorrow's Spread")
 
 col_text, col_visual = st.columns(2)
 
@@ -460,7 +460,7 @@ with col_text:
     st.markdown(
         "The spread reverts fast, but new shocks arrive faster. What survives that — a weak "
         "directional signal, linear and concentrated in mean reversion — is not a tradeable "
-        "edge, but an honest one."
+        "edge, but a real one."
     )
 
 with col_visual:
