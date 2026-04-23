@@ -48,7 +48,7 @@ def base_layout(fig: go.Figure, yrange=None, height: int = 280) -> go.Figure:
 
 def section_label(label: str) -> None:
     st.markdown(
-        f'<p style="font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;'
+        f'<p style="font-size:0.85rem;letter-spacing:0.1em;text-transform:uppercase;'
         f'color:rgba(200,200,200,0.5);margin-bottom:0.25rem;">{label}</p>',
         unsafe_allow_html=True,
     )

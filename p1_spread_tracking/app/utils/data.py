@@ -26,6 +26,8 @@ def inject_global_css() -> None:
             padding-left: 0.75rem;
         }
         .stMarkdown h3 { margin-top: 1.25rem !important; margin-bottom: 0.4rem !important; }
+        .stMarkdown p { font-size: 1.05rem !important; line-height: 1.7 !important; }
+
         hr {
             border: none !important;
             border-top: 1px solid rgba(255,255,255,0.10) !important;
