@@ -66,13 +66,13 @@ def two_stats(
         f"<div style='display:flex;gap:1.5rem;margin-bottom:0.75rem;'>"
         f"<div style='flex:1;padding:1rem;border-left:3px solid {la};'>"
         f"<div style='font-size:2.6rem;font-weight:700;margin:0;line-height:1;'>{lv}</div>"
-        f"<div style='font-size:0.9rem;color:rgba(250,250,250,0.55);margin:0.05rem 0 0;'>{ll}</div>"
-        f"<div style='font-size:0.75rem;color:rgba(250,250,250,0.35);margin:0;'>{ls}</div>"
+        f"<div style='font-size:1.05rem;color:rgba(250,250,250,0.55);margin:0.05rem 0 0;'>{ll}</div>"
+        f"<div style='font-size:0.9rem;color:rgba(250,250,250,0.35);margin:0;'>{ls}</div>"
         f"</div>"
         f"<div style='flex:1;padding:1rem;border-left:3px solid {ra};'>"
         f"<div style='font-size:2.6rem;font-weight:700;margin:0;line-height:1;{r_opacity}'>{rv}</div>"
-        f"<div style='font-size:0.9rem;color:rgba(250,250,250,0.55);margin:0.05rem 0 0;'>{rl}</div>"
-        f"<div style='font-size:0.75rem;color:rgba(250,250,250,0.35);margin:0;'>{rs}</div>"
+        f"<div style='font-size:1.05rem;color:rgba(250,250,250,0.55);margin:0.05rem 0 0;'>{rl}</div>"
+        f"<div style='font-size:0.9rem;color:rgba(250,250,250,0.35);margin:0;'>{rs}</div>"
         f"</div>"
         f"</div>",
         unsafe_allow_html=True,
@@ -431,7 +431,7 @@ with col_visual:
     st.markdown(
         "<div style='padding:0.85rem 1rem;border-left:3px solid rgba(255,255,255,0.15);'>"
         "<div style='font-size:2.6rem;font-weight:700;margin:0;line-height:1;'>R² = 0.0002</div>"
-        "<div style='font-size:0.9rem;color:rgba(250,250,250,0.5);margin:0.05rem 0 0;'>"
+        "<div style='font-size:1.05rem;color:rgba(250,250,250,0.5);margin:0.05rem 0 0;'>"
         "variance in Compound's move explained by yesterday's Aave move</div>"
         "</div>",
         unsafe_allow_html=True,
