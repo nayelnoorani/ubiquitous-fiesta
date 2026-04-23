@@ -118,71 +118,72 @@ with col_text:
     )
 
 with col_visual:
-    # Scatter: same-day Aave TVL % change vs spread level
-    tvl_chg = wide["aave_tvlUsd"].pct_change() * 100
-    valid = tvl_chg.notna() & wide["spread_vs_net"].notna() & (tvl_chg.abs() < 15)
-    x_sc = tvl_chg[valid].values
-    y_sc = wide["spread_vs_net"][valid].values
-    m, b_int = np.polyfit(x_sc, y_sc, 1)
-    x_line = np.linspace(x_sc.min(), x_sc.max(), 200)
+    sub_scatter, sub_granger = st.columns([3, 2])
 
-    fig_scatter = go.Figure()
-    fig_scatter.add_trace(go.Scatter(
-        x=x_sc, y=y_sc, mode="markers",
-        marker=dict(color=SPREAD_COLOR, opacity=0.22, size=4),
-        name="Daily observation",
-    ))
-    fig_scatter.add_trace(go.Scatter(
-        x=x_line, y=m * x_line + b_int, mode="lines",
-        line=dict(color="rgba(255,255,255,0.6)", width=1.5, dash="dot"),
-        name="Linear fit",
-    ))
-    fig_scatter.add_annotation(
-        x=0.97, y=0.92, xref="paper", yref="paper",
-        text="r = 0.10", showarrow=False, xanchor="right",
-        font=dict(color="rgba(255,255,255,0.8)", size=13),
-        bgcolor="rgba(26,29,35,0.7)", borderpad=4,
-    )
-    base_layout(fig_scatter, height=240)
-    fig_scatter.update_layout(
-        xaxis_title="Aave TVL change (%)",
-        yaxis_title="Spread (%)",
-        showlegend=False,
-        title=dict(
-            text="Same-day TVL change vs spread",
-            font=dict(size=12, color="rgba(255,255,255,0.45)"), x=0,
-        ),
-    )
-    st.plotly_chart(fig_scatter, use_container_width=True)
+    with sub_scatter:
+        tvl_chg = wide["aave_tvlUsd"].pct_change() * 100
+        valid = tvl_chg.notna() & wide["spread_vs_net"].notna() & (tvl_chg.abs() < 15)
+        x_sc = tvl_chg[valid].values
+        y_sc = wide["spread_vs_net"][valid].values
+        m, b_int = np.polyfit(x_sc, y_sc, 1)
+        x_line = np.linspace(x_sc.min(), x_sc.max(), 200)
 
-    # Granger causality direction diagram
-    st.markdown(
-        "<div style='padding:0.25rem 0.25rem 0;'>"
-        "<p style='font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;"
-        "color:rgba(250,250,250,0.4);margin-bottom:0.65rem;'>Granger causality direction</p>"
+        fig_scatter = go.Figure()
+        fig_scatter.add_trace(go.Scatter(
+            x=x_sc, y=y_sc, mode="markers",
+            marker=dict(color=SPREAD_COLOR, opacity=0.22, size=4),
+            name="Daily observation",
+        ))
+        fig_scatter.add_trace(go.Scatter(
+            x=x_line, y=m * x_line + b_int, mode="lines",
+            line=dict(color="rgba(255,255,255,0.6)", width=1.5, dash="dot"),
+            name="Linear fit",
+        ))
+        fig_scatter.add_annotation(
+            x=0.97, y=0.92, xref="paper", yref="paper",
+            text="r = 0.10", showarrow=False, xanchor="right",
+            font=dict(color="rgba(255,255,255,0.8)", size=13),
+            bgcolor="rgba(26,29,35,0.7)", borderpad=4,
+        )
+        base_layout(fig_scatter, height=280)
+        fig_scatter.update_layout(
+            xaxis_title="Aave TVL change (%)",
+            yaxis_title="Spread (%)",
+            showlegend=False,
+            title=dict(
+                text="Same-day TVL change vs spread",
+                font=dict(size=12, color="rgba(255,255,255,0.45)"), x=0,
+            ),
+        )
+        st.plotly_chart(fig_scatter, use_container_width=True)
 
-        "<div style='display:flex;align-items:center;gap:0.5rem;margin-bottom:0.3rem;'>"
-        "<span style='font-size:0.9rem;font-weight:700;background:rgba(240,178,122,0.12);"
-        "border:1px solid rgba(240,178,122,0.45);border-radius:4px;padding:0.2rem 0.5rem;'>SPREAD</span>"
-        "<span style='color:rgba(0,211,149,0.9);font-size:1.2rem;'>──────→</span>"
-        "<span style='font-size:0.9rem;font-weight:700;background:rgba(182,80,158,0.12);"
-        "border:1px solid rgba(182,80,158,0.45);border-radius:4px;padding:0.2rem 0.5rem;'>TVL</span>"
-        "<span style='font-size:0.8rem;color:rgba(250,250,250,0.5);margin-left:0.35rem;'>"
-        "F = 593 &nbsp;·&nbsp; p = 0.0</span>"
-        "</div>"
+    with sub_granger:
+        _box = (
+            "font-size:0.85rem;font-weight:700;border-radius:4px;"
+            "padding:0.2rem 0.4rem;min-width:4rem;text-align:center;display:inline-block;"
+        )
+        _arrow = "font-size:1rem;min-width:3.5rem;text-align:center;display:inline-block;"
+        _stat = "font-size:0.8rem;color:rgba(250,250,250,0.5);margin:0.1rem 0 0.75rem;padding-left:0.1rem;"
 
-        "<div style='display:flex;align-items:center;gap:0.5rem;opacity:0.3;'>"
-        "<span style='font-size:0.9rem;font-weight:700;border:1px solid rgba(255,255,255,0.2);"
-        "border-radius:4px;padding:0.2rem 0.5rem;'>TVL</span>"
-        "<span style='font-size:1.2rem;letter-spacing:0.05em;'>╌╌╌╌╌╌→</span>"
-        "<span style='font-size:0.9rem;font-weight:700;border:1px solid rgba(255,255,255,0.2);"
-        "border-radius:4px;padding:0.2rem 0.5rem;'>SPREAD</span>"
-        "<span style='font-size:0.8rem;color:rgba(250,250,250,0.5);margin-left:0.35rem;'>"
-        "F = 0.0001 &nbsp;·&nbsp; p = 0.99</span>"
-        "</div>"
-        "</div>",
-        unsafe_allow_html=True,
-    )
+        st.markdown(
+            "<div style='padding-top:0.5rem;'>"
+            "<p style='font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;"
+            "color:rgba(250,250,250,0.4);margin-bottom:0.75rem;'>Granger causality direction</p>"
+
+            f"<div style='display:flex;align-items:center;gap:0.3rem;margin-bottom:0.15rem;'>"
+            f"<span style='{_box}background:rgba(240,178,122,0.12);border:1px solid rgba(240,178,122,0.45);'>SPREAD</span>"
+            f"<span style='{_arrow}color:rgba(0,211,149,0.9);'>──────→</span>"
+            f"<span style='{_box}background:rgba(182,80,158,0.12);border:1px solid rgba(182,80,158,0.45);'>TVL</span>"
+            f"</div><p style='{_stat}'>F = 593 &nbsp;·&nbsp; p = 0.0</p>"
+
+            f"<div style='display:flex;align-items:center;gap:0.3rem;margin-bottom:0.15rem;'>"
+            f"<span style='{_box}border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.3);'>TVL</span>"
+            f"<span style='{_arrow}color:rgba(255,255,255,0.25);'>──────→</span>"
+            f"<span style='{_box}border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.3);'>SPREAD</span>"
+            f"</div><p style='{_stat}'>F = 0.0001 &nbsp;·&nbsp; p = 0.99</p>"
+            "</div>",
+            unsafe_allow_html=True,
+        )
 
 st.markdown("---")
 
