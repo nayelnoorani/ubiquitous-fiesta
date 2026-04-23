@@ -194,18 +194,19 @@ for col, card in zip(cols, cards):
             f"""
             <div style='border:1px solid {border_color};border-radius:8px;
             background:{bg_color};padding:1rem;margin-bottom:0.5rem;
-            min-height:300px;display:flex;flex-direction:column;'>
+            min-height:230px;display:flex;flex-direction:column;'>
               <div style='min-height:3.8rem;'>
-                <p style='font-size:0.8rem;color:rgba(250,250,250,0.6);
-                margin:0;line-height:1.4;text-align:justify;'>{card['hypothesis']}</p>
+                <p style='font-size:0.9rem;color:rgba(250,250,250,0.6);
+                margin:0;line-height:1.4;'>{card['hypothesis']}</p>
               </div>
               <p style='font-size:1.1rem;margin:0.4rem 0 0.15rem;text-align:center;'>{card['verdict']}</p>
               <p style='font-size:1.4rem;font-weight:700;margin:0 0 0.5rem;
               line-height:1;text-align:center;'>{card['stat']}</p>
-              <p style='font-size:0.8rem;color:rgba(250,250,250,0.7);margin:0;
-              line-height:1.4;text-align:justify;'>{card['finding']}</p>
+              <p style='font-size:0.9rem;color:rgba(250,250,250,0.7);margin:0 0 0.75rem;
+              line-height:1.4;'>{card['finding']}</p>
+              <a href='/Model_Results' style='font-size:0.85rem;color:rgba(250,250,250,0.45);
+              text-decoration:none;margin-top:auto;'>See full analysis →</a>
             </div>
             """,
             unsafe_allow_html=True,
         )
-        st.page_link("pages/3_Model_Results.py", label="See full analysis →")
