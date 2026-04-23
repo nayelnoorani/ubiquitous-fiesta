@@ -5,7 +5,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import streamlit as st
 
-from utils.data import big_number, inject_global_css
+from utils.data import inject_global_css
 
 st.set_page_config(
     page_title="Aave vs Compound — Spread Analysis",
