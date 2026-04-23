@@ -92,15 +92,15 @@ CARD_STYLE = (
     "display:flex;align-items:center;gap:2rem;padding:1.25rem 1.5rem;"
     "border:1px solid rgba(255,255,255,0.08);border-radius:8px;margin-bottom:0.75rem;"
 )
-STAT_STYLE = "font-size:3.9rem;font-weight:700;margin:0;line-height:1;"
-LABEL_STYLE = "font-size:1.05rem;color:rgba(250,250,250,0.55);margin:0.1rem 0 0;"
+STAT_STYLE = "font-size:2.6rem;font-weight:700;margin:0;line-height:1;"
+LABEL_STYLE = "font-size:1.05rem;color:rgba(250,250,250,0.55);margin:0.05rem 0 0;"
 TEXT_STYLE = "font-size:1rem;line-height:1.6;margin:0;"
 
 st.markdown(
     f"<div style='{CARD_STYLE}'>"
     f"<div style='flex:1;'>"
-    f"<p style='{STAT_STYLE}'>p = 0.0</p>"
-    f"<p style='{LABEL_STYLE}'>Engle-Granger cointegration test</p>"
+    f"<div style='{STAT_STYLE}'>p = 0.0</div>"
+    f"<div style='{LABEL_STYLE}'>Engle-Granger cointegration test</div>"
     f"</div>"
     f"<div style='flex:2;'><p style='{TEXT_STYLE}'>"
     "Aave and Compound share a long-run equilibrium that neither protocol can permanently escape. "
@@ -116,8 +116,8 @@ st.markdown(
     "That's not slow arbitrage — that's near-instantaneous price discovery for a market that never closes."
     f"</p></div>"
     f"<div style='flex:1;text-align:right;'>"
-    f"<p style='{STAT_STYLE}'>0.95 days</p>"
-    f"<p style='{LABEL_STYLE}'>Ornstein-Uhlenbeck half-life</p>"
+    f"<div style='{STAT_STYLE}'>0.95 days</div>"
+    f"<div style='{LABEL_STYLE}'>Ornstein-Uhlenbeck half-life</div>"
     f"</div></div>",
     unsafe_allow_html=True,
 )
@@ -125,8 +125,8 @@ st.markdown(
 st.markdown(
     f"<div style='{CARD_STYLE}'>"
     f"<div style='flex:1;'>"
-    f"<p style='{STAT_STYLE}'>0.19%</p>"
-    f"<p style='{LABEL_STYLE}'>Median daily spread</p>"
+    f"<div style='{STAT_STYLE}'>0.19%</div>"
+    f"<div style='{LABEL_STYLE}'>Median daily spread</div>"
     f"</div>"
     f"<div style='flex:2;'><p style='{TEXT_STYLE}'>"
     "On a typical day, borrowing on Aave costs virtually the same as borrowing on Compound. "
@@ -143,8 +143,8 @@ st.markdown(
     "stress doesn't break the market, it accelerates it."
     f"</p></div>"
     f"<div style='flex:1;text-align:right;'>"
-    f"<p style='{STAT_STYLE}'>92.5%</p>"
-    f"<p style='{LABEL_STYLE}'>Spike episodes resolved within 7 days</p>"
+    f"<div style='{STAT_STYLE}'>92.5%</div>"
+    f"<div style='{LABEL_STYLE}'>Spike episodes resolved within 7 days</div>"
     f"</div></div>",
     unsafe_allow_html=True,
 )
