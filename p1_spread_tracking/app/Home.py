@@ -22,7 +22,7 @@ col_text, col_visual = st.columns([2, 3])
 
 with col_text:
     st.markdown(
-        "<style>#opening-text{font-size:1.7rem!important;font-weight:700!important;line-height:1.7!important;}</style>"
+        "<style>#opening-text{font-size:1.6rem!important;font-weight:700!important;line-height:1.4!important;}</style>"
         "<div id='opening-text' style='padding-top:1rem;'>"
         "I've spent ten years analyzing interest rates in traditional finance. "
         "I came to DeFi with five reasonable hypotheses — the data overturned four of them."
