@@ -178,10 +178,11 @@ with col_visual:
     fig_seg.update_layout(
         xaxis_title=None,
         yaxis_title="Spread (%, clipped ±10%)",
-        title=dict(
-            text="Spread series — four stationary segments (Bai-Perron breaks)",
-            font=dict(size=12, color="rgba(255,255,255,0.45)"), x=0,
-        ),
+    )
+    st.markdown(
+        "<p style='font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;"
+        "color:rgba(250,250,250,0.4);margin-bottom:0;'>Spread series — four stationary segments (Bai-Perron breaks)</p>",
+        unsafe_allow_html=True,
     )
     st.plotly_chart(fig_seg, use_container_width=True)
 
@@ -344,10 +345,11 @@ with col_visual:
         xaxis=dict(range=[-1.4, 1.4], tickvals=[-1, 0, 1], tickfont_color=AXIS_TICK_COLOR),
         yaxis=dict(autorange="reversed", tickfont_color=AXIS_TICK_COLOR),
         showlegend=False,
-        title=dict(
-            text="Linear regression coefficients",
-            font=dict(size=12, color="rgba(255,255,255,0.45)"), x=0,
-        ),
+    )
+    st.markdown(
+        "<p style='font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;"
+        "color:rgba(250,250,250,0.4);margin-bottom:0;'>Linear regression coefficients</p>",
+        unsafe_allow_html=True,
     )
     st.plotly_chart(fig_coef, use_container_width=True)
 

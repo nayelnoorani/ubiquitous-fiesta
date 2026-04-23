@@ -257,10 +257,11 @@ with col_visual:
         xaxis_title="Days since spike started",
         yaxis_title="% still open",
         showlegend=False,
-        title=dict(
-            text="Episode survival — % still open by day",
-            font=dict(size=12, color="rgba(255,255,255,0.45)"), x=0,
-        ),
+    )
+    st.markdown(
+        "<p style='font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;"
+        "color:rgba(250,250,250,0.4);margin-bottom:0;'>Episode survival — % still open by day</p>",
+        unsafe_allow_html=True,
     )
     st.plotly_chart(fig_surv, use_container_width=True)
 
@@ -326,10 +327,11 @@ with col_visual:
     fig_dow.update_layout(
         yaxis_title="Persistence rate (%)",
         showlegend=False,
-        title=dict(
-            text="Sign-persistence rate by day of week",
-            font=dict(size=12, color="rgba(255,255,255,0.45)"), x=0,
-        ),
+    )
+    st.markdown(
+        "<p style='font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;"
+        "color:rgba(250,250,250,0.4);margin-bottom:0;'>Sign-persistence rate by day of week</p>",
+        unsafe_allow_html=True,
     )
     st.plotly_chart(fig_dow, use_container_width=True)
 
@@ -417,10 +419,11 @@ with col_visual:
         xaxis_title="Lag (days)",
         yaxis_title="Pearson r",
         showlegend=False,
-        title=dict(
-            text="Cross-correlation function — rate changes",
-            font=dict(size=12, color="rgba(255,255,255,0.45)"), x=0,
-        ),
+    )
+    st.markdown(
+        "<p style='font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;"
+        "color:rgba(250,250,250,0.4);margin-bottom:0;'>Cross-correlation function — rate changes</p>",
+        unsafe_allow_html=True,
     )
     st.plotly_chart(fig_ccf, use_container_width=True)
 
@@ -508,10 +511,11 @@ with col_visual:
         xaxis_title="Relative importance",
         yaxis=dict(autorange="reversed", tickfont_color=AXIS_TICK_COLOR),
         showlegend=False,
-        title=dict(
-            text="Logistic regression — feature importance (next-day direction)",
-            font=dict(size=12, color="rgba(255,255,255,0.45)"), x=0,
-        ),
+    )
+    st.markdown(
+        "<p style='font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;"
+        "color:rgba(250,250,250,0.4);margin-bottom:0;'>Logistic regression — feature importance (next-day direction)</p>",
+        unsafe_allow_html=True,
     )
     st.plotly_chart(fig_feat, use_container_width=True)
 
