@@ -7,7 +7,7 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
-from utils.data import AAVE_COLOR, COMPOUND_COLOR, SPREAD_COLOR, load_wide
+from utils.data import SPREAD_COLOR, load_wide
 
 st.set_page_config(page_title="How I Built This", layout="wide")
 
@@ -46,14 +46,225 @@ st.title("How I Built This")
 st.markdown("*The decisions, detours, and one result that looked perfect for thirty seconds.*")
 
 st.markdown(
-    "The traditional path to capital efficiency has a cover charge. Save enough, then access "
+    "The traditional path to capital efficiency has a cover charge — save enough, then access "
     "the vehicles that help you save more efficiently. DeFi drops it. I came in through that "
     "door — with a rates background and no idea what I'd find."
 )
 
 st.markdown("---")
 
-# ── Section 1: The Tautology Catch ───────────────────────────────────────────
+# ── Section 1: Stack and Pipeline ────────────────────────────────────────────
+
+st.markdown("## The stack")
+
+st.markdown("""
+- **Data:** DefiLlama Yields API — daily USDC pool data for Aave V3 and Compound V3 on Ethereum mainnet
+- **Quality gate:** Five checks on every ingest — schema, row count, null rates, value ranges, group distribution
+- **Language:** Python — pandas, statsmodels, scikit-learn, xgboost
+- **App:** Streamlit
+- **Storage:** gitignored — raw JSON and processed files not committed
+""")
+
+st.markdown("---")
+
+# ── Section 2: The Stationarity Investigation ─────────────────────────────────
+
+st.markdown("## When the tests disagree, dig deeper")
+
+col_text, col_visual = st.columns([3, 2])
+
+with col_text:
+    st.markdown(
+        "Early in the analysis, a basic question needed answering: does the spread between Aave "
+        "and Compound have a stable long-run average, or does it drift over time? The answer "
+        "matters — a spread that drifts indefinitely is a different beast from one that always "
+        "returns to the same level."
+    )
+    st.markdown(
+        "Two standard tests were run to answer this — ADF and KPSS. They gave opposite answers. "
+        "ADF said the spread was stationary; KPSS said it wasn't. Both rejecting simultaneously "
+        "points to a specific diagnosis: trend-stationary, meaning the mean is slowly drifting "
+        "rather than fixed. That's an unsatisfying answer, so the analysis went further."
+    )
+    st.markdown(
+        "A third test — Zivot-Andrews — was run to allow for a single abrupt shift in the mean. "
+        "It found one, dated to July 2023. A fourth test — Bai-Perron — allowed for multiple "
+        "breaks and found three in total. Crucially, within each of the resulting four segments, "
+        "both ADF and KPSS agree: the spread is cleanly stationary. The mean shifts between "
+        "segments are economically negligible — all within 3 basis points of zero."
+    )
+    st.markdown(
+        "The original conflict was a statistical artifact of three small regime shifts, not "
+        "evidence of a genuine trend. Zivot-Andrews and Bai-Perron were not in the original "
+        "plan. This is what following the data looks like."
+    )
+
+with col_visual:
+    segments = [
+        ("2023-02-06", "2023-07-29", -0.0072, "S1"),
+        ("2023-07-30", "2024-01-15",  0.0227, "S2"),
+        ("2024-01-16", "2024-09-22",  0.0074, "S3"),
+        ("2024-09-23", None,          -0.0010, "S4"),
+    ]
+    seg_colors = [
+        "rgba(182,80,158,0.12)",
+        "rgba(0,211,149,0.10)",
+        "rgba(240,178,122,0.12)",
+        "rgba(100,149,237,0.10)",
+    ]
+    seg_line_colors = [
+        "rgba(182,80,158,0.8)",
+        "rgba(0,211,149,0.8)",
+        "rgba(240,178,122,0.8)",
+        "rgba(100,149,237,0.8)",
+    ]
+
+    spread = wide["spread_vs_net"].clip(-10, 10)
+    dates = wide.index
+
+    fig_seg = go.Figure()
+
+    fig_seg.add_trace(go.Scatter(
+        x=dates, y=spread, mode="lines",
+        line=dict(color="rgba(255,255,255,0.18)", width=1),
+        showlegend=False,
+    ))
+
+    for i, (start, end, mean, label) in enumerate(segments):
+        start_dt = pd.Timestamp(start)
+        end_dt = pd.Timestamp(end) if end else wide.index[-1]
+
+        fig_seg.add_trace(go.Scatter(
+            x=[start_dt, end_dt, end_dt, start_dt],
+            y=[-10, -10, 10, 10],
+            fill="toself",
+            fillcolor=seg_colors[i],
+            line=dict(width=0),
+            showlegend=False,
+            hoverinfo="skip",
+        ))
+
+        fig_seg.add_shape(
+            type="line",
+            x0=start_dt, x1=end_dt,
+            y0=mean, y1=mean,
+            line=dict(color=seg_line_colors[i], width=2, dash="solid"),
+        )
+
+        mid_dt = start_dt + (end_dt - start_dt) / 2
+        fig_seg.add_annotation(
+            x=mid_dt, y=mean,
+            text=f"{label}: {mean:+.3f}%",
+            showarrow=False, yshift=12,
+            font=dict(color=seg_line_colors[i], size=10),
+            bgcolor="rgba(14,17,23,0.7)", borderpad=2,
+        )
+
+    for break_date in ["2023-07-30", "2024-01-16", "2024-09-23"]:
+        fig_seg.add_vline(
+            x=pd.Timestamp(break_date).value / 1e6,
+            line_dash="dot", line_color="rgba(255,255,255,0.3)", line_width=1,
+        )
+
+    base_layout(fig_seg, yrange=[-10, 10], height=370)
+    fig_seg.update_layout(
+        xaxis_title=None,
+        yaxis_title="Spread (%, clipped ±10%)",
+        title=dict(
+            text="Spread series — four stationary segments (Bai-Perron breaks)",
+            font=dict(size=12, color="rgba(255,255,255,0.45)"), x=0,
+        ),
+    )
+    st.plotly_chart(fig_seg, use_container_width=True)
+
+st.markdown("---")
+
+# ── Section 3: Feature Engineering ───────────────────────────────────────────
+
+st.markdown("## Why I built 22 features and kept 10")
+
+col_text, col_visual = st.columns([3, 2])
+
+with col_text:
+    st.markdown(
+        "The spread between the two protocols — Aave's rate minus Compound's net cost — was the "
+        "target. To predict it, or understand what drives it, you need features that capture the "
+        "state of both protocols on any given day: how far apart they are right now, which "
+        "direction each is moving, how much liquidity each holds, and whether the market is in a "
+        "calm or stressed regime."
+    )
+    st.markdown(
+        "That's four categories of information. The first decision was how to handle Compound's "
+        "COMP token rewards, which reduce borrowers' effective cost. Were those rewards stable "
+        "over time, or volatile? If volatile, a spread calculated with rewards included would "
+        "behave differently from one calculated without. The answer was: unknown. So both "
+        "versions of every spread feature were built — one net of rewards, one ignoring them — "
+        "and the data was allowed to decide."
+    )
+    st.markdown(
+        "It decided quickly. Every rewards-adjusted feature correlated above 0.95 with its "
+        "unadjusted equivalent. Compound's rewards are stable enough that both definitions carry "
+        "the same information. All unadjusted variants were dropped. Of the 22 features built, "
+        "10 survived selection."
+    )
+
+with col_visual:
+    kept = [
+        ("spread_vs_net", "Spread"),
+        ("spread_vs_net_lag_1d", "Spread"),
+        ("spread_vs_net_rolling_mean_7d", "Spread"),
+        ("spread_vs_net_rolling_std_7d", "Spread"),
+        ("aave_rate_change_1d", "Rate momentum"),
+        ("compound_net_change_1d", "Rate momentum"),
+        ("tvl_ratio", "Liquidity"),
+        ("aave_tvl_change_pct_1d", "Liquidity"),
+        ("days_since_spike", "Regime"),
+        ("day_of_week", "Calendar"),
+    ]
+    dropped_corr = [
+        ("spread_vs_base", "r = 0.990"),
+        ("spread_vs_base_lag_1d", "r = 0.990"),
+        ("spread_vs_base_rolling_mean_7d", "r = 0.962"),
+        ("spread_vs_base_rolling_std_7d", "r = 1.000"),
+        ("spread_vs_base_zscore_30d", "r = 0.997"),
+        ("compound_base_change_1d", "r = 1.000"),
+        ("rate_divergence_direction_vs_base", "r = 0.968"),
+    ]
+    dropped_var = [
+        ("spread_vs_net_zscore_30d", "low variance"),
+        ("rate_divergence_direction_vs_net", "low variance"),
+        ("compound_apyReward", "low variance"),
+        ("compound_tvl_change_pct_1d", "low variance"),
+        ("is_spike", "low variance"),
+    ]
+
+    st.markdown(
+        "<p style='font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;"
+        "color:rgba(250,250,250,0.4);margin-bottom:0.4rem;'>✓ Kept — 10 features</p>",
+        unsafe_allow_html=True,
+    )
+    kept_df = pd.DataFrame(kept, columns=["Feature", "Group"])
+    st.dataframe(kept_df, use_container_width=True, hide_index=True, height=230)
+
+    st.markdown(
+        "<p style='font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;"
+        "color:rgba(250,250,250,0.4);margin:0.75rem 0 0.4rem;'>✗ Dropped — high correlation (7)</p>",
+        unsafe_allow_html=True,
+    )
+    corr_df = pd.DataFrame(dropped_corr, columns=["Feature", "Reason"])
+    st.dataframe(corr_df, use_container_width=True, hide_index=True, height=215)
+
+    st.markdown(
+        "<p style='font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;"
+        "color:rgba(250,250,250,0.4);margin:0.75rem 0 0.4rem;'>✗ Dropped — low variance (5)</p>",
+        unsafe_allow_html=True,
+    )
+    var_df = pd.DataFrame(dropped_var, columns=["Feature", "Reason"])
+    st.dataframe(var_df, use_container_width=True, hide_index=True, height=180)
+
+st.markdown("---")
+
+# ── Section 4: The Tautology Catch ───────────────────────────────────────────
 
 st.markdown("## R² = 1.0 (not what it seems)")
 
@@ -125,234 +336,28 @@ with col_visual:
 
 st.markdown("---")
 
-# ── Section 2: Feature Engineering ───────────────────────────────────────────
-
-st.markdown("## Why I built 22 features and kept 10")
-
-col_text, col_visual = st.columns([3, 2])
-
-with col_text:
-    st.markdown(
-        "The spread between the two protocols — Aave's rate minus Compound's net cost — was the "
-        "target. To predict it, or understand what drives it, you need features that capture the "
-        "state of both protocols on any given day: how far apart they are right now, which "
-        "direction each is moving, how much liquidity each holds, and whether the market is in a "
-        "calm or stressed regime."
-    )
-    st.markdown(
-        "That's six categories of information. The first decision was how to handle Compound's "
-        "COMP token rewards, which reduce borrowers' effective cost. Were those rewards stable "
-        "over time, or volatile? If volatile, a spread calculated with rewards included would "
-        "behave differently from one calculated without. The answer was: unknown. So both "
-        "versions of every spread feature were built — one net of rewards, one ignoring them — "
-        "and the data was allowed to decide."
-    )
-    st.markdown(
-        "It decided quickly. Every rewards-adjusted feature correlated above 0.95 with its "
-        "unadjusted equivalent. Compound's rewards are stable enough that both definitions carry "
-        "the same information. All unadjusted variants were dropped. Of the 22 features built, "
-        "10 survived selection."
-    )
-
-with col_visual:
-    kept = [
-        ("spread_vs_net", "Spread"),
-        ("spread_vs_net_lag_1d", "Spread"),
-        ("spread_vs_net_rolling_mean_7d", "Spread"),
-        ("spread_vs_net_rolling_std_7d", "Spread"),
-        ("aave_rate_change_1d", "Rate momentum"),
-        ("compound_net_change_1d", "Rate momentum"),
-        ("tvl_ratio", "Liquidity"),
-        ("aave_tvl_change_pct_1d", "Liquidity"),
-        ("days_since_spike", "Regime"),
-        ("day_of_week", "Calendar"),
-    ]
-    dropped_corr = [
-        ("spread_vs_base", "r = 0.990"),
-        ("spread_vs_base_lag_1d", "r = 0.990"),
-        ("spread_vs_base_rolling_mean_7d", "r = 0.962"),
-        ("spread_vs_base_rolling_std_7d", "r = 1.000"),
-        ("spread_vs_base_zscore_30d", "r = 0.997"),
-        ("compound_base_change_1d", "r = 1.000"),
-        ("rate_divergence_direction_vs_base", "r = 0.968"),
-    ]
-    dropped_var = [
-        ("spread_vs_net_zscore_30d", "low variance"),
-        ("rate_divergence_direction_vs_net", "low variance"),
-        ("compound_apyReward", "low variance"),
-        ("compound_tvl_change_pct_1d", "low variance"),
-        ("is_spike", "low variance"),
-    ]
-
-    st.markdown(
-        "<p style='font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;"
-        "color:rgba(250,250,250,0.4);margin-bottom:0.4rem;'>✓ Kept — 10 features</p>",
-        unsafe_allow_html=True,
-    )
-    kept_df = pd.DataFrame(kept, columns=["Feature", "Group"])
-    st.dataframe(kept_df, use_container_width=True, hide_index=True, height=230)
-
-    st.markdown(
-        "<p style='font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;"
-        "color:rgba(250,250,250,0.4);margin:0.75rem 0 0.4rem;'>✗ Dropped — high correlation (7)</p>",
-        unsafe_allow_html=True,
-    )
-    corr_df = pd.DataFrame(dropped_corr, columns=["Feature", "Reason"])
-    st.dataframe(corr_df, use_container_width=True, hide_index=True, height=215)
-
-    st.markdown(
-        "<p style='font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;"
-        "color:rgba(250,250,250,0.4);margin:0.75rem 0 0.4rem;'>✗ Dropped — low variance (5)</p>",
-        unsafe_allow_html=True,
-    )
-    var_df = pd.DataFrame(dropped_var, columns=["Feature", "Reason"])
-    st.dataframe(var_df, use_container_width=True, hide_index=True, height=180)
-
-st.markdown("---")
-
-# ── Section 3: The Stationarity Investigation ─────────────────────────────────
-
-st.markdown("## When the tests disagree, dig deeper")
-
-col_text, col_visual = st.columns([3, 2])
-
-with col_text:
-    st.markdown(
-        "Early in the analysis, a basic question needed answering: does the spread between Aave "
-        "and Compound have a stable long-run average, or does it drift over time? The answer "
-        "matters — a spread that drifts indefinitely is a different beast from one that always "
-        "returns to the same level."
-    )
-    st.markdown(
-        "Two standard tests were run to answer this — ADF and KPSS. They gave opposite answers. "
-        "ADF said the spread was stationary; KPSS said it wasn't. Both rejecting simultaneously "
-        "points to a specific diagnosis: trend-stationary, meaning the mean is slowly drifting "
-        "rather than fixed. That's an unsatisfying answer, so the analysis went further."
-    )
-    st.markdown(
-        "A third test — Zivot-Andrews — was run to allow for a single abrupt shift in the mean. "
-        "It found one, dated to July 2023. A fourth test — Bai-Perron — allowed for multiple "
-        "breaks and found three in total. Crucially, within each of the resulting four segments, "
-        "both ADF and KPSS agree: the spread is cleanly stationary. The mean shifts between "
-        "segments are economically negligible — all within 3 basis points of zero."
-    )
-    st.markdown(
-        "The original conflict was a statistical artifact of three small regime shifts, not "
-        "evidence of a genuine trend. Zivot-Andrews and Bai-Perron were not in the original "
-        "plan. This is what following the data looks like."
-    )
-
-with col_visual:
-    # Bai-Perron break dates and segment means (from results)
-    segments = [
-        ("2023-02-06", "2023-07-29", -0.0072, "S1"),
-        ("2023-07-30", "2024-01-15",  0.0227, "S2"),
-        ("2024-01-16", "2024-09-22",  0.0074, "S3"),
-        ("2024-09-23", None,          -0.0010, "S4"),
-    ]
-    seg_colors = [
-        f"rgba(182,80,158,0.12)",   # purple
-        f"rgba(0,211,149,0.10)",    # green
-        f"rgba(240,178,122,0.12)",  # amber
-        f"rgba(100,149,237,0.10)",  # blue
-    ]
-    seg_line_colors = [
-        "rgba(182,80,158,0.8)",
-        "rgba(0,211,149,0.8)",
-        "rgba(240,178,122,0.8)",
-        "rgba(100,149,237,0.8)",
-    ]
-
-    spread = wide["spread_vs_net"].clip(-10, 10)
-    dates = wide.index
-
-    fig_seg = go.Figure()
-
-    # Full spread line (subdued)
-    fig_seg.add_trace(go.Scatter(
-        x=dates, y=spread, mode="lines",
-        line=dict(color="rgba(255,255,255,0.18)", width=1),
-        name="Spread (clipped ±10%)",
-        showlegend=False,
-    ))
-
-    # Segment shading and mean lines
-    for i, (start, end, mean, label) in enumerate(segments):
-        start_dt = pd.Timestamp(start)
-        end_dt = pd.Timestamp(end) if end else wide.index[-1]
-        seg_spread = spread.loc[start_dt:end_dt]
-
-        # Background shading via scatter fill
-        fig_seg.add_trace(go.Scatter(
-            x=[start_dt, end_dt, end_dt, start_dt],
-            y=[-10, -10, 10, 10],
-            fill="toself",
-            fillcolor=seg_colors[i],
-            line=dict(width=0),
-            showlegend=False,
-            hoverinfo="skip",
-        ))
-
-        # Segment mean line
-        fig_seg.add_shape(
-            type="line",
-            x0=start_dt, x1=end_dt,
-            y0=mean, y1=mean,
-            line=dict(color=seg_line_colors[i], width=2, dash="solid"),
-        )
-
-        # Segment label with mean
-        mid_dt = start_dt + (end_dt - start_dt) / 2
-        fig_seg.add_annotation(
-            x=mid_dt, y=mean,
-            text=f"{label}: {mean:+.3f}%",
-            showarrow=False, yshift=12,
-            font=dict(color=seg_line_colors[i], size=10),
-            bgcolor="rgba(14,17,23,0.7)", borderpad=2,
-        )
-
-    # Break date vertical lines
-    for break_date in ["2023-07-30", "2024-01-16", "2024-09-23"]:
-        fig_seg.add_vline(
-            x=pd.Timestamp(break_date).value / 1e6,
-            line_dash="dot", line_color="rgba(255,255,255,0.3)", line_width=1,
-        )
-
-    base_layout(fig_seg, yrange=[-10, 10], height=370)
-    fig_seg.update_layout(
-        xaxis_title=None,
-        yaxis_title="Spread (%, clipped ±10%)",
-        title=dict(
-            text="Spread series — four stationary segments (Bai-Perron breaks)",
-            font=dict(size=12, color="rgba(255,255,255,0.45)"), x=0,
-        ),
-    )
-    st.plotly_chart(fig_seg, use_container_width=True)
-
-st.markdown("---")
-
-# ── Section 4: Stack and Pipeline ────────────────────────────────────────────
-
-st.markdown("## The stack")
-
-st.markdown("""
-- **Data:** DefiLlama Yields API — daily USDC pool data for Aave V3 and Compound V3 on Ethereum mainnet
-- **Quality gate:** Five checks on every ingest — schema, row count, null rates, value ranges, group distribution
-- **Language:** Python — pandas, statsmodels, scikit-learn, xgboost
-- **App:** Streamlit
-- **Data:** gitignored — raw JSON and processed files not committed
-""")
-
-st.markdown("---")
-
 # ── Section 5: What's Next ────────────────────────────────────────────────────
 
 st.markdown("## Nine more questions")
 
 st.markdown(
     "This is the first of ten planned research questions on DeFi interest rate behaviour. "
-    "The remaining nine cover utilization curve sensitivity, event-driven rate behaviour, "
-    "mean reversion timescales, cross-asset volatility, rate forecasting, rate-price lead-lag, "
-    "calendar effects, Aave V2 vs V3, and whale detection. Each will follow the same structure: "
-    "a question, a dataset, a set of hypotheses, and an account of what the data said."
+    "The remaining nine:"
+)
+
+st.markdown("""
+- Utilization curve sensitivity
+- Event-driven rate behaviour
+- Mean reversion timescales
+- Cross-asset volatility
+- Rate forecasting
+- Rate-price lead-lag
+- Calendar effects
+- Aave V2 vs V3
+- Whale detection
+""")
+
+st.markdown(
+    "Each will follow the same structure: a question, a dataset, a set of hypotheses, "
+    "and an account of what the data said."
 )
