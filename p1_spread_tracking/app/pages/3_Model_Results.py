@@ -64,8 +64,7 @@ with col_text:
 
     section_label("Why it matters")
     st.markdown(
-        "Borrowers respond to price signals, not the other way around. The spread opens first — "
-        "then capital migrates. Arbitrage is the mechanism, not the cause."
+        "The spread opens first and capital follows — arbitrage is the mechanism, not the cause."
     )
 
 with col_visual:
@@ -184,6 +183,8 @@ with col_text:
 
     section_label("Tested")
     st.markdown(
+        "Each test was chosen to probe a different aspect of the lead/lag claim: whether a signal "
+        "exists at all, which direction it runs, and whether it holds up over time. "
         "Cross-correlation function at lags −5 to +5. Granger causality in both directions at "
         "lags 1–5. Rolling 180-day Granger windows to test stability. Cross-lagged regressions."
     )
@@ -198,9 +199,8 @@ with col_text:
 
     section_label("Why it matters")
     st.markdown(
-        "There is no exploitable lead/lag signal. Both protocols respond to the same external "
-        "conditions independently. Size doesn't confer timing advantage in a market with no "
-        "closing bell."
+        "Each protocol responds primarily to its own history, not to the other's. "
+        "Size doesn't confer timing advantage in a market with no closing bell."
     )
 
 with col_visual:
@@ -245,8 +245,9 @@ with col_text:
 
     section_label("Why it matters")
     st.markdown(
-        "The spread reverts fast but new shocks arrive faster. What little signal exists is "
-        "linear and concentrated in mean reversion — not a tradeable edge, but an honest one."
+        "The spread reverts fast, but new shocks arrive faster. What survives that — a weak "
+        "directional signal, linear and concentrated in mean reversion — is not a tradeable "
+        "edge, but an honest one."
     )
 
 with col_visual:
