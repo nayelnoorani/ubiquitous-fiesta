@@ -67,6 +67,16 @@ def base_layout(fig: go.Figure, yrange=None) -> go.Figure:
     return fig
 
 
+# ── Page Introduction ─────────────────────────────────────────────────────────
+
+st.title("Explore the Data")
+st.markdown(
+    "*The verdicts are on page 1. Here's the data that made the hypotheses seem reasonable "
+    "in the first place.*"
+)
+
+st.markdown("---")
+
 # ── Section 1: Opening Hook ───────────────────────────────────────────────────
 
 st.markdown("## Compound looks more expensive. It isn't.")
