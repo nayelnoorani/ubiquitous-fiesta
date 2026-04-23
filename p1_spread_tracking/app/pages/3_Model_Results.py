@@ -149,8 +149,8 @@ with col_visual:
         yaxis_title="Spread (%)",
         showlegend=False,
         title=dict(
-            text="Same-day TVL change vs spread",
-            font=dict(size=12, color="rgba(255,255,255,0.45)"), x=0,
+            text="SAME-DAY TVL CHANGE VS SPREAD",
+            font=dict(size=11, color="rgba(250,250,250,0.4)"), x=0,
         ),
     )
     st.plotly_chart(fig_scatter, use_container_width=True)
