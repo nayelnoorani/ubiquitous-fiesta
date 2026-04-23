@@ -87,54 +87,66 @@ st.markdown(
     "they failed because it's faster and smarter than expected."
 )
 
-st.markdown("<br>", unsafe_allow_html=True)
+CARD_STYLE = (
+    "display:flex;align-items:center;gap:2rem;padding:1.25rem 1.5rem;"
+    "border:1px solid rgba(255,255,255,0.08);border-radius:8px;margin-bottom:0.75rem;"
+)
+STAT_STYLE = "font-size:2.6rem;font-weight:700;margin:0;line-height:1;"
+LABEL_STYLE = "font-size:1.05rem;color:rgba(250,250,250,0.55);margin:0.35rem 0 0;"
+TEXT_STYLE = "font-size:1rem;line-height:1.6;margin:0;"
 
-# Card 1 — stat LEFT, text RIGHT
-c_stat, c_text = st.columns([1, 2])
-with c_stat:
-    big_number("p = 0.0", "Engle-Granger cointegration test")
-with c_text:
-    st.markdown(
-        "Aave and Compound share a long-run equilibrium that neither protocol can permanently escape. "
-        "No matter how far rates diverge, the market always closes the gap."
-    )
+st.markdown(
+    f"<div style='{CARD_STYLE}'>"
+    f"<div style='flex:1;'>"
+    f"<p style='{STAT_STYLE}'>p = 0.0</p>"
+    f"<p style='{LABEL_STYLE}'>Engle-Granger cointegration test</p>"
+    f"</div>"
+    f"<div style='flex:2;'><p style='{TEXT_STYLE}'>"
+    "Aave and Compound share a long-run equilibrium that neither protocol can permanently escape. "
+    "No matter how far rates diverge, the market always closes the gap."
+    f"</p></div></div>",
+    unsafe_allow_html=True,
+)
 
-st.markdown("<br>", unsafe_allow_html=True)
+st.markdown(
+    f"<div style='{CARD_STYLE}'>"
+    f"<div style='flex:2;'><p style='{TEXT_STYLE}'>"
+    "The typical spread shock loses half its size within a single trading day. "
+    "That's not slow arbitrage — that's near-instantaneous price discovery for a market that never closes."
+    f"</p></div>"
+    f"<div style='flex:1;text-align:right;'>"
+    f"<p style='{STAT_STYLE}'>0.95 days</p>"
+    f"<p style='{LABEL_STYLE}'>Ornstein-Uhlenbeck half-life</p>"
+    f"</div></div>",
+    unsafe_allow_html=True,
+)
 
-# Card 2 — stat RIGHT, text LEFT
-c_text, c_stat = st.columns([2, 1])
-with c_text:
-    st.markdown(
-        "The typical spread shock loses half its size within a single trading day. "
-        "That's not slow arbitrage — that's near-instantaneous price discovery for a market that never closes."
-    )
-with c_stat:
-    big_number("0.95 days", "Ornstein-Uhlenbeck half-life")
+st.markdown(
+    f"<div style='{CARD_STYLE}'>"
+    f"<div style='flex:1;'>"
+    f"<p style='{STAT_STYLE}'>0.19%</p>"
+    f"<p style='{LABEL_STYLE}'>Median daily spread</p>"
+    f"</div>"
+    f"<div style='flex:2;'><p style='{TEXT_STYLE}'>"
+    "On a typical day, borrowing on Aave costs virtually the same as borrowing on Compound. "
+    "The volatility that dominates the statistics lives almost entirely in rare, short-lived spikes."
+    f"</p></div></div>",
+    unsafe_allow_html=True,
+)
 
-st.markdown("<br>", unsafe_allow_html=True)
-
-# Card 3 — stat LEFT, text RIGHT
-c_stat, c_text = st.columns([1, 2])
-with c_stat:
-    big_number("0.19%", "Median daily spread")
-with c_text:
-    st.markdown(
-        "On a typical day, borrowing on Aave costs virtually the same as borrowing on Compound. "
-        "The volatility that dominates the statistics lives almost entirely in rare, short-lived spikes."
-    )
-
-st.markdown("<br>", unsafe_allow_html=True)
-
-# Card 4 — stat RIGHT, text LEFT
-c_text, c_stat = st.columns([2, 1])
-with c_text:
-    st.markdown(
-        "When spreads do blow out, they almost always close within a week. "
-        "The larger the gap, the stronger the pull back toward equilibrium — "
-        "stress doesn't break the market, it accelerates it."
-    )
-with c_stat:
-    big_number("92.5%", "Spike episodes resolved within 7 days")
+st.markdown(
+    f"<div style='{CARD_STYLE}'>"
+    f"<div style='flex:2;'><p style='{TEXT_STYLE}'>"
+    "When spreads do blow out, they almost always close within a week. "
+    "The larger the gap, the stronger the pull back toward equilibrium — "
+    "stress doesn't break the market, it accelerates it."
+    f"</p></div>"
+    f"<div style='flex:1;text-align:right;'>"
+    f"<p style='{STAT_STYLE}'>92.5%</p>"
+    f"<p style='{LABEL_STYLE}'>Spike episodes resolved within 7 days</p>"
+    f"</div></div>",
+    unsafe_allow_html=True,
+)
 
 st.markdown("---")
 
