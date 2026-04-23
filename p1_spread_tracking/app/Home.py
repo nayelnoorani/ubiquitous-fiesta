@@ -41,7 +41,7 @@ with col_visual:
 | Spreads are harder to close after a rate spike | ❌ |
 | Friday spreads get locked in over the weekend | ❌ |
 | The bigger protocol moves first; the smaller one follows | ❌ |
-| Yesterday's spread tells you something about tomorrow's | ⚠️ |
+| Today's spread tells you something about tomorrow's spread | ⚠️ |
 """)
 
 st.markdown("---")
@@ -149,7 +149,7 @@ cards = [
         "finding": "Yesterday's Aave move explains essentially nothing about today's Compound move.",
     },
     {
-        "hypothesis": "Yesterday's spread tells you something about tomorrow's",
+        "hypothesis": "Today's spread tells you something about tomorrow's spread",
         "verdict": "⚠️",
         "stat": "6.4%",
         "finding": "The level is nearly unpredictable. But the direction has a weak signal worth knowing.",

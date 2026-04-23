@@ -94,7 +94,7 @@ with col_text:
         "That's six categories of information. The first decision was how to handle Compound's "
         "COMP token rewards, which reduce borrowers' effective cost. Were those rewards stable "
         "over time, or volatile? If volatile, a spread calculated with rewards included would "
-        "behave differently from one calculated without. The honest answer was: unknown. So both "
+        "behave differently from one calculated without. The answer was: unknown. So both "
         "versions of every spread feature were built — one net of rewards, one ignoring them — "
         "and the data was allowed to decide."
     )
