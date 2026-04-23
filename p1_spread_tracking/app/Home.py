@@ -33,15 +33,47 @@ with col_text:
     )
 
 with col_visual:
-    st.markdown("""
-| Hypothesis | Verdict |
-|:---|:---:|
-| Large liquidity flows drive rate divergence between protocols | ❌ |
-| Spreads are harder to close after a rate spike | ❌ |
-| Friday spreads get locked in over the weekend | ❌ |
-| The bigger protocol moves first; the smaller one follows | ❌ |
-| Today's spread tells you something about tomorrow's spread | ⚠️ |
-""")
+    st.markdown(
+        """
+        <table style='width:100%;border-collapse:collapse;font-size:0.95rem;'>
+          <thead>
+            <tr>
+              <th style='text-align:left;padding:0.5rem 0.75rem;
+              color:rgba(250,250,250,0.4);font-weight:500;font-size:0.8rem;
+              letter-spacing:0.05em;text-transform:uppercase;
+              border-bottom:1px solid rgba(255,255,255,0.1);'>Hypothesis</th>
+              <th style='text-align:center;padding:0.5rem 0.75rem;
+              color:rgba(250,250,250,0.4);font-weight:500;font-size:0.8rem;
+              letter-spacing:0.05em;text-transform:uppercase;
+              border-bottom:1px solid rgba(255,255,255,0.1);'>Verdict</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style='background:rgba(220,60,60,0.07);'>
+              <td style='padding:0.55rem 0.75rem;'>Large liquidity flows drive rate divergence between protocols</td>
+              <td style='text-align:center;padding:0.55rem 0.75rem;'>❌</td>
+            </tr>
+            <tr style='background:rgba(220,60,60,0.07);'>
+              <td style='padding:0.55rem 0.75rem;'>Spreads are harder to close after a rate spike</td>
+              <td style='text-align:center;padding:0.55rem 0.75rem;'>❌</td>
+            </tr>
+            <tr style='background:rgba(220,60,60,0.07);'>
+              <td style='padding:0.55rem 0.75rem;'>Friday spreads get locked in over the weekend</td>
+              <td style='text-align:center;padding:0.55rem 0.75rem;'>❌</td>
+            </tr>
+            <tr style='background:rgba(220,60,60,0.07);'>
+              <td style='padding:0.55rem 0.75rem;'>The bigger protocol moves first; the smaller one follows</td>
+              <td style='text-align:center;padding:0.55rem 0.75rem;'>❌</td>
+            </tr>
+            <tr style='background:rgba(240,178,122,0.08);'>
+              <td style='padding:0.55rem 0.75rem;'>Today's spread tells you something about tomorrow's spread</td>
+              <td style='text-align:center;padding:0.55rem 0.75rem;'>⚠️</td>
+            </tr>
+          </tbody>
+        </table>
+        """,
+        unsafe_allow_html=True,
+    )
 
 st.markdown("---")
 
@@ -153,9 +185,24 @@ cards = [
 
 cols = st.columns(5)
 for col, card in zip(cols, cards):
+    is_warning = card["verdict"] == "⚠️"
+    border_color = "rgba(240,178,122,0.45)" if is_warning else "rgba(220,60,60,0.35)"
+    bg_color = "rgba(240,178,122,0.05)" if is_warning else "rgba(220,60,60,0.05)"
+
     with col:
-        st.markdown(f"**{card['hypothesis']}**")
-        st.markdown(f"### {card['verdict']}")
-        st.markdown(f"## {card['stat']}")
-        st.markdown(card["finding"])
+        st.markdown(
+            f"""
+            <div style='border:1px solid {border_color};border-radius:8px;
+            background:{bg_color};padding:1rem;margin-bottom:0.5rem;'>
+              <p style='font-size:0.8rem;color:rgba(250,250,250,0.6);
+              margin:0 0 0.65rem;line-height:1.4;'>{card['hypothesis']}</p>
+              <p style='font-size:1.6rem;margin:0 0 0.15rem;'>{card['verdict']}</p>
+              <p style='font-size:1.8rem;font-weight:700;margin:0 0 0.5rem;
+              line-height:1;'>{card['stat']}</p>
+              <p style='font-size:0.8rem;color:rgba(250,250,250,0.7);margin:0;
+              line-height:1.4;'>{card['finding']}</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
         st.page_link("pages/3_Model_Results.py", label="See full analysis →")
