@@ -91,8 +91,8 @@ CARD_STYLE = (
     "display:flex;align-items:center;gap:2rem;padding:1.25rem 1.5rem;"
     "border:1px solid rgba(255,255,255,0.08);border-radius:8px;margin-bottom:0.75rem;"
 )
-STAT_STYLE = "font-size:2.6rem;font-weight:700;margin:0;line-height:1;"
-LABEL_STYLE = "font-size:1.05rem;color:rgba(250,250,250,0.55);margin:0.35rem 0 0;"
+STAT_STYLE = "font-size:3.9rem;font-weight:700;margin:0;line-height:1;"
+LABEL_STYLE = "font-size:1.05rem;color:rgba(250,250,250,0.55);margin:0.1rem 0 0;"
 TEXT_STYLE = "font-size:1rem;line-height:1.6;margin:0;"
 
 st.markdown(
@@ -207,12 +207,12 @@ for col, card in zip(cols, cards):
             <div style='border:1px solid {border_color};border-radius:8px;
             background:{bg_color};padding:1rem;margin-bottom:0.5rem;
             min-height:280px;display:flex;flex-direction:column;'>
-              <div style='min-height:3.8rem;'>
+              <div style='min-height:5rem;'>
                 <p style='font-size:0.9rem;color:rgba(250,250,250,0.6);
                 margin:0;line-height:1.4;'>{card['hypothesis']}</p>
               </div>
               <p style='font-size:1.1rem;margin:0.4rem 0 0.15rem;text-align:center;'>{card['verdict']}</p>
-              <p style='font-size:1.4rem;font-weight:700;margin:0 0 0.5rem;
+              <p style='font-size:2rem;font-weight:700;margin:0 0 0.5rem;
               line-height:1;text-align:center;'>{card['stat']}</p>
               <p style='font-size:0.9rem;color:rgba(250,250,250,0.7);margin:0 0 0.75rem;
               line-height:1.4;'>{card['finding']}</p>

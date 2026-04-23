@@ -68,33 +68,49 @@ st.markdown("---")
 
 st.markdown("## Compound looks more expensive. It isn't.")
 
-col_left, col_right = st.columns(2)
+_HDR = "font-size:1.5rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,250,250,0.45);margin:0 0 0.2rem;"
+_NUM = "font-size:3.9rem;font-weight:700;margin:0;line-height:1;"
+_LBL = "font-size:1.05rem;color:rgba(250,250,250,0.55);margin:0.1rem 0 0;"
+_SUB = "font-size:1rem;color:rgba(250,250,250,0.45);margin:0;"
+_CAP = "font-size:0.9rem;color:rgba(250,250,250,0.45);margin:0.5rem 0 0;"
 
-with col_left:
-    st.markdown(
-        "<p style='font-size:1.5rem;letter-spacing:0.08em;text-transform:uppercase;"
-        "color:rgba(250,250,250,0.45);margin-bottom:0.5rem;'>The headline view</p>",
-        unsafe_allow_html=True,
-    )
-    r1, r2 = st.columns(2)
-    with r1:
-        big_number("4.87%", "Aave mean borrow rate")
-    with r2:
-        big_number("4.99%", "Compound mean borrow rate")
-    st.caption("Base rates, no rewards adjustment — Compound appears more expensive")
-
-with col_right:
-    st.markdown(
-        "<p style='font-size:1.5rem;letter-spacing:0.08em;text-transform:uppercase;"
-        "color:rgba(250,250,250,0.45);margin-bottom:0.5rem;'>The full picture</p>",
-        unsafe_allow_html=True,
-    )
-    r1, r2 = st.columns(2)
-    with r1:
-        big_number("45%", "of days Aave costs more", "base rates only")
-    with r2:
-        big_number("55%", "of days Aave costs more", "net of COMP rewards")
-    st.caption("Once rewards are factored in, Aave is the pricier protocol most of the time")
+st.markdown(
+    f"""
+    <div style='display:grid;grid-template-columns:1fr 1fr;gap:3rem;'>
+      <div>
+        <p style='{_HDR}'>The headline view</p>
+        <div style='display:flex;gap:2.5rem;'>
+          <div>
+            <p style='{_NUM}'>4.87%</p>
+            <p style='{_LBL}'>Aave mean borrow rate</p>
+          </div>
+          <div>
+            <p style='{_NUM}'>4.99%</p>
+            <p style='{_LBL}'>Compound mean borrow rate</p>
+          </div>
+        </div>
+        <p style='{_CAP}'>Base rates, no rewards adjustment — Compound appears more expensive</p>
+      </div>
+      <div>
+        <p style='{_HDR}'>The full picture</p>
+        <div style='display:flex;gap:2.5rem;'>
+          <div>
+            <p style='{_NUM}'>45%</p>
+            <p style='{_LBL}'>of days Aave costs more</p>
+            <p style='{_SUB}'>base rates only</p>
+          </div>
+          <div>
+            <p style='{_NUM}'>55%</p>
+            <p style='{_LBL}'>of days Aave costs more</p>
+            <p style='{_SUB}'>net of COMP rewards</p>
+          </div>
+        </div>
+        <p style='{_CAP}'>Once rewards are factored in, Aave is the pricier protocol most of the time</p>
+      </div>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
 st.markdown(
     "Compound pays COMP token rewards directly to borrowers, reducing their effective cost by "

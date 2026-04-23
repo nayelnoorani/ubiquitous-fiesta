@@ -45,8 +45,8 @@ def big_number(value: str, label: str, sub: str = "", compact: bool = False) -> 
     st.markdown(
         f"""
         <div style='padding:{padding};'>
-          <p style='font-size:2.6rem;font-weight:700;margin:0;line-height:1;'>{value}</p>
-          <p style='font-size:1.05rem;color:rgba(250,250,250,0.55);margin:0.35rem 0 0;'>{label}</p>
+          <p style='font-size:3.9rem;font-weight:700;margin:0;line-height:1;'>{value}</p>
+          <p style='font-size:1.05rem;color:rgba(250,250,250,0.55);margin:0.1rem 0 0;'>{label}</p>
           {sub_html}
         </div>
         """,

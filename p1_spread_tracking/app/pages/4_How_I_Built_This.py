@@ -365,15 +365,15 @@ st.markdown(
 )
 
 st.markdown("""
-- Utilization curve sensitivity
-- Event-driven rate behaviour
-- Mean reversion timescales
-- Cross-asset volatility
-- Rate forecasting
-- Rate-price lead-lag
-- Calendar effects
-- Aave V2 vs V3
-- Whale detection
+1. Utilization curve sensitivity
+2. Event-driven rate behaviour
+3. Mean reversion timescales
+4. Cross-asset volatility
+5. Rate forecasting
+6. Rate-price lead-lag
+7. Calendar effects
+8. Aave V2 vs V3
+9. Whale detection
 """)
 
 st.markdown(
