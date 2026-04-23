@@ -193,14 +193,17 @@ for col, card in zip(cols, cards):
         st.markdown(
             f"""
             <div style='border:1px solid {border_color};border-radius:8px;
-            background:{bg_color};padding:1rem;margin-bottom:0.5rem;'>
-              <p style='font-size:0.8rem;color:rgba(250,250,250,0.6);
-              margin:0 0 0.65rem;line-height:1.4;'>{card['hypothesis']}</p>
-              <p style='font-size:1.6rem;margin:0 0 0.15rem;'>{card['verdict']}</p>
-              <p style='font-size:1.8rem;font-weight:700;margin:0 0 0.5rem;
-              line-height:1;'>{card['stat']}</p>
+            background:{bg_color};padding:1rem;margin-bottom:0.5rem;
+            min-height:300px;display:flex;flex-direction:column;'>
+              <div style='min-height:3.8rem;'>
+                <p style='font-size:0.8rem;color:rgba(250,250,250,0.6);
+                margin:0;line-height:1.4;text-align:justify;'>{card['hypothesis']}</p>
+              </div>
+              <p style='font-size:1.1rem;margin:0.4rem 0 0.15rem;text-align:center;'>{card['verdict']}</p>
+              <p style='font-size:1.4rem;font-weight:700;margin:0 0 0.5rem;
+              line-height:1;text-align:center;'>{card['stat']}</p>
               <p style='font-size:0.8rem;color:rgba(250,250,250,0.7);margin:0;
-              line-height:1.4;'>{card['finding']}</p>
+              line-height:1.4;text-align:justify;'>{card['finding']}</p>
             </div>
             """,
             unsafe_allow_html=True,
