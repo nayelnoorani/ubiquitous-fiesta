@@ -1,16 +1,43 @@
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+import pandas as pd
+import plotly.graph_objects as go
 import streamlit as st
+
+from utils.data import AAVE_COLOR, COMPOUND_COLOR, SPREAD_COLOR, load_wide
 
 st.set_page_config(page_title="How I Built This", layout="wide")
 
+wide = load_wide()
 
-def placeholder(description: str) -> None:
-    st.markdown(
-        f'<div style="border:1px dashed rgba(180,180,180,0.3);border-radius:6px;'
-        f'padding:2rem;margin:0.5rem 0;text-align:center;'
-        f'color:rgba(200,200,200,0.5);font-style:italic;">'
-        f'[ {description} ]</div>',
-        unsafe_allow_html=True,
+# ── Shared style ──────────────────────────────────────────────────────────────
+
+PANEL_BG = "rgba(26,29,35,0.0)"
+GRID_COLOR = "rgba(255,255,255,0.06)"
+AXIS_LINE_COLOR = "rgba(255,255,255,0.2)"
+AXIS_TICK_COLOR = "rgba(255,255,255,0.85)"
+
+
+def base_layout(fig: go.Figure, yrange=None, height: int = 300) -> go.Figure:
+    fig.update_layout(
+        paper_bgcolor=PANEL_BG,
+        plot_bgcolor=PANEL_BG,
+        font_color="#FAFAFA",
+        height=height,
+        margin=dict(l=8, r=8, t=36, b=8),
+        hovermode="closest",
     )
+    fig.update_xaxes(
+        gridcolor=GRID_COLOR, linecolor=AXIS_LINE_COLOR, tickfont_color=AXIS_TICK_COLOR,
+    )
+    fig.update_yaxes(
+        gridcolor=GRID_COLOR, linecolor=AXIS_LINE_COLOR, tickfont_color=AXIS_TICK_COLOR,
+        range=yrange,
+    )
+    return fig
 
 
 # ── Page Introduction ─────────────────────────────────────────────────────────
@@ -39,28 +66,22 @@ with col_text:
         "prior day's spread, each protocol's daily rate change, TVL movements, and calendar "
         "variables."
     )
-
     st.markdown(
         "The results came back: MAE = 0.0, R² = 1.0, direction accuracy = 100%. "
         "Perfect on every metric."
     )
-
     st.markdown("That's a red flag.")
-
     st.markdown(
         "The coefficients made it obvious: the model assigned exactly 1.0 to the prior day's "
         "spread, exactly 1.0 to Aave's daily rate change, and exactly −1.0 to Compound's daily "
         "rate change. Everything else got zero. It had found an accounting identity:"
     )
-
     st.code("spread_t = spread_lag_1d + aave_rate_change_1d − compound_net_change_1d")
-
     st.markdown(
         "Today's spread is yesterday's spread plus whatever Aave moved, minus whatever Compound "
         "moved. That's not a prediction — it's arithmetic. The features contained a perfect "
         "reconstruction of the target by construction, and the model found it."
     )
-
     st.markdown(
         "The right response is not to fix it. The identity is real and it's logged. The "
         "interesting question — can you predict tomorrow's spread from today's features — is a "
@@ -68,10 +89,39 @@ with col_text:
     )
 
 with col_visual:
-    placeholder(
-        "The three dominant coefficients displayed large — 1.0, 1.0, −1.0 — "
-        "with the identity written out below them and all other feature coefficients shown as 0.0"
+    feat_names = [
+        "Spread lag", "Aave rate change", "Compound net change",
+        "Spread rolling mean", "Spread rolling std",
+        "TVL ratio", "Aave TVL change", "Days since spike", "Day of week",
+    ]
+    coef_vals = [1.0, 1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    bar_colors = [
+        SPREAD_COLOR if abs(v) == 1.0 else "rgba(255,255,255,0.15)"
+        for v in coef_vals
+    ]
+
+    fig_coef = go.Figure()
+    fig_coef.add_trace(go.Bar(
+        x=coef_vals,
+        y=feat_names,
+        orientation="h",
+        marker_color=bar_colors,
+        text=[f"{v:+.1f}" if abs(v) == 1.0 else "0.0" for v in coef_vals],
+        textposition="outside",
+        textfont=dict(color=AXIS_TICK_COLOR, size=12),
+    ))
+    fig_coef.add_vline(x=0, line_color="rgba(255,255,255,0.2)", line_width=1)
+    base_layout(fig_coef, yrange=None, height=320)
+    fig_coef.update_layout(
+        xaxis=dict(range=[-1.4, 1.4], tickvals=[-1, 0, 1], tickfont_color=AXIS_TICK_COLOR),
+        yaxis=dict(autorange="reversed", tickfont_color=AXIS_TICK_COLOR),
+        showlegend=False,
+        title=dict(
+            text="Linear regression coefficients",
+            font=dict(size=12, color="rgba(255,255,255,0.45)"), x=0,
+        ),
     )
+    st.plotly_chart(fig_coef, use_container_width=True)
 
 st.markdown("---")
 
@@ -89,7 +139,6 @@ with col_text:
         "direction each is moving, how much liquidity each holds, and whether the market is in a "
         "calm or stressed regime."
     )
-
     st.markdown(
         "That's six categories of information. The first decision was how to handle Compound's "
         "COMP token rewards, which reduce borrowers' effective cost. Were those rewards stable "
@@ -98,7 +147,6 @@ with col_text:
         "versions of every spread feature were built — one net of rewards, one ignoring them — "
         "and the data was allowed to decide."
     )
-
     st.markdown(
         "It decided quickly. Every rewards-adjusted feature correlated above 0.95 with its "
         "unadjusted equivalent. Compound's rewards are stable enough that both definitions carry "
@@ -107,10 +155,58 @@ with col_text:
     )
 
 with col_visual:
-    placeholder(
-        "Two-column table — 22 features in, 10 features out, "
-        "dropped features grouped by reason (high correlation vs low variance)"
+    kept = [
+        ("spread_vs_net", "Spread"),
+        ("spread_vs_net_lag_1d", "Spread"),
+        ("spread_vs_net_rolling_mean_7d", "Spread"),
+        ("spread_vs_net_rolling_std_7d", "Spread"),
+        ("aave_rate_change_1d", "Rate momentum"),
+        ("compound_net_change_1d", "Rate momentum"),
+        ("tvl_ratio", "Liquidity"),
+        ("aave_tvl_change_pct_1d", "Liquidity"),
+        ("days_since_spike", "Regime"),
+        ("day_of_week", "Calendar"),
+    ]
+    dropped_corr = [
+        ("spread_vs_base", "r = 0.990"),
+        ("spread_vs_base_lag_1d", "r = 0.990"),
+        ("spread_vs_base_rolling_mean_7d", "r = 0.962"),
+        ("spread_vs_base_rolling_std_7d", "r = 1.000"),
+        ("spread_vs_base_zscore_30d", "r = 0.997"),
+        ("compound_base_change_1d", "r = 1.000"),
+        ("rate_divergence_direction_vs_base", "r = 0.968"),
+    ]
+    dropped_var = [
+        ("spread_vs_net_zscore_30d", "low variance"),
+        ("rate_divergence_direction_vs_net", "low variance"),
+        ("compound_apyReward", "low variance"),
+        ("compound_tvl_change_pct_1d", "low variance"),
+        ("is_spike", "low variance"),
+    ]
+
+    st.markdown(
+        "<p style='font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;"
+        "color:rgba(250,250,250,0.4);margin-bottom:0.4rem;'>✓ Kept — 10 features</p>",
+        unsafe_allow_html=True,
     )
+    kept_df = pd.DataFrame(kept, columns=["Feature", "Group"])
+    st.dataframe(kept_df, use_container_width=True, hide_index=True, height=230)
+
+    st.markdown(
+        "<p style='font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;"
+        "color:rgba(250,250,250,0.4);margin:0.75rem 0 0.4rem;'>✗ Dropped — high correlation (7)</p>",
+        unsafe_allow_html=True,
+    )
+    corr_df = pd.DataFrame(dropped_corr, columns=["Feature", "Reason"])
+    st.dataframe(corr_df, use_container_width=True, hide_index=True, height=215)
+
+    st.markdown(
+        "<p style='font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;"
+        "color:rgba(250,250,250,0.4);margin:0.75rem 0 0.4rem;'>✗ Dropped — low variance (5)</p>",
+        unsafe_allow_html=True,
+    )
+    var_df = pd.DataFrame(dropped_var, columns=["Feature", "Reason"])
+    st.dataframe(var_df, use_container_width=True, hide_index=True, height=180)
 
 st.markdown("---")
 
@@ -127,14 +223,12 @@ with col_text:
         "matters — a spread that drifts indefinitely is a different beast from one that always "
         "returns to the same level."
     )
-
     st.markdown(
         "Two standard tests were run to answer this — ADF and KPSS. They gave opposite answers. "
         "ADF said the spread was stationary; KPSS said it wasn't. Both rejecting simultaneously "
         "points to a specific diagnosis: trend-stationary, meaning the mean is slowly drifting "
         "rather than fixed. That's an unsatisfying answer, so the analysis went further."
     )
-
     st.markdown(
         "A third test — Zivot-Andrews — was run to allow for a single abrupt shift in the mean. "
         "It found one, dated to July 2023. A fourth test — Bai-Perron — allowed for multiple "
@@ -142,7 +236,6 @@ with col_text:
         "both ADF and KPSS agree: the spread is cleanly stationary. The mean shifts between "
         "segments are economically negligible — all within 3 basis points of zero."
     )
-
     st.markdown(
         "The original conflict was a statistical artifact of three small regime shifts, not "
         "evidence of a genuine trend. Zivot-Andrews and Bai-Perron were not in the original "
@@ -150,14 +243,91 @@ with col_text:
     )
 
 with col_visual:
-    placeholder(
-        "Timeline of the spread series with four segments marked and their mean levels labeled — "
-        "the near-identical means make the point visually · "
-        "Segments: 2023-02-06→2023-07-29 (mean −0.007%), "
-        "2023-07-30→2024-01-15 (mean +0.023%), "
-        "2024-01-16→2024-09-22 (mean +0.007%), "
-        "2024-09-23→present (mean −0.001%)"
+    # Bai-Perron break dates and segment means (from results)
+    segments = [
+        ("2023-02-06", "2023-07-29", -0.0072, "S1"),
+        ("2023-07-30", "2024-01-15",  0.0227, "S2"),
+        ("2024-01-16", "2024-09-22",  0.0074, "S3"),
+        ("2024-09-23", None,          -0.0010, "S4"),
+    ]
+    seg_colors = [
+        f"rgba(182,80,158,0.12)",   # purple
+        f"rgba(0,211,149,0.10)",    # green
+        f"rgba(240,178,122,0.12)",  # amber
+        f"rgba(100,149,237,0.10)",  # blue
+    ]
+    seg_line_colors = [
+        "rgba(182,80,158,0.8)",
+        "rgba(0,211,149,0.8)",
+        "rgba(240,178,122,0.8)",
+        "rgba(100,149,237,0.8)",
+    ]
+
+    spread = wide["spread_vs_net"].clip(-10, 10)
+    dates = wide.index
+
+    fig_seg = go.Figure()
+
+    # Full spread line (subdued)
+    fig_seg.add_trace(go.Scatter(
+        x=dates, y=spread, mode="lines",
+        line=dict(color="rgba(255,255,255,0.18)", width=1),
+        name="Spread (clipped ±10%)",
+        showlegend=False,
+    ))
+
+    # Segment shading and mean lines
+    for i, (start, end, mean, label) in enumerate(segments):
+        start_dt = pd.Timestamp(start)
+        end_dt = pd.Timestamp(end) if end else wide.index[-1]
+        seg_spread = spread.loc[start_dt:end_dt]
+
+        # Background shading via scatter fill
+        fig_seg.add_trace(go.Scatter(
+            x=[start_dt, end_dt, end_dt, start_dt],
+            y=[-10, -10, 10, 10],
+            fill="toself",
+            fillcolor=seg_colors[i],
+            line=dict(width=0),
+            showlegend=False,
+            hoverinfo="skip",
+        ))
+
+        # Segment mean line
+        fig_seg.add_shape(
+            type="line",
+            x0=start_dt, x1=end_dt,
+            y0=mean, y1=mean,
+            line=dict(color=seg_line_colors[i], width=2, dash="solid"),
+        )
+
+        # Segment label with mean
+        mid_dt = start_dt + (end_dt - start_dt) / 2
+        fig_seg.add_annotation(
+            x=mid_dt, y=mean,
+            text=f"{label}: {mean:+.3f}%",
+            showarrow=False, yshift=12,
+            font=dict(color=seg_line_colors[i], size=10),
+            bgcolor="rgba(14,17,23,0.7)", borderpad=2,
+        )
+
+    # Break date vertical lines
+    for break_date in ["2023-07-30", "2024-01-16", "2024-09-23"]:
+        fig_seg.add_vline(
+            x=pd.Timestamp(break_date).value / 1e6,
+            line_dash="dot", line_color="rgba(255,255,255,0.3)", line_width=1,
+        )
+
+    base_layout(fig_seg, yrange=[-10, 10], height=370)
+    fig_seg.update_layout(
+        xaxis_title=None,
+        yaxis_title="Spread (%, clipped ±10%)",
+        title=dict(
+            text="Spread series — four stationary segments (Bai-Perron breaks)",
+            font=dict(size=12, color="rgba(255,255,255,0.45)"), x=0,
+        ),
     )
+    st.plotly_chart(fig_seg, use_container_width=True)
 
 st.markdown("---")
 
@@ -184,5 +354,5 @@ st.markdown(
     "The remaining nine cover utilization curve sensitivity, event-driven rate behaviour, "
     "mean reversion timescales, cross-asset volatility, rate forecasting, rate-price lead-lag, "
     "calendar effects, Aave V2 vs V3, and whale detection. Each will follow the same structure: "
-    "a question, a dataset, a set of hypotheses, and an honest account of what the data said."
+    "a question, a dataset, a set of hypotheses, and an account of what the data said."
 )
