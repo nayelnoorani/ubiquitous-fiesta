@@ -91,7 +91,7 @@ st.markdown("---")
 
 # ── Round 1 — TVL Flows Drive Divergence ─────────────────────────────────────
 
-st.markdown("### Round 1 — TVL Flows Drive Divergence")
+st.markdown("## Round 1 — TVL Flows Drive Divergence")
 
 col_text, col_visual = st.columns(2)
 
@@ -188,7 +188,7 @@ st.markdown("---")
 
 # ── Round 2 — Post-Spike Spreads Close Slower ─────────────────────────────────
 
-st.markdown("### Round 2 — Post-Spike Spreads Close Slower")
+st.markdown("## Round 2 — Post-Spike Spreads Close Slower")
 
 col_text, col_visual = st.columns(2)
 
@@ -266,7 +266,7 @@ st.markdown("---")
 
 # ── Round 3 — Friday Spreads Get Locked In ────────────────────────────────────
 
-st.markdown("### Round 3 — Friday Spreads Get Locked In Over the Weekend")
+st.markdown("## Round 3 — Friday Spreads Get Locked In Over the Weekend")
 
 col_text, col_visual = st.columns(2)
 
@@ -343,7 +343,7 @@ st.markdown("---")
 
 # ── Round 4 — The Bigger Protocol Moves First ─────────────────────────────────
 
-st.markdown("### Round 4 — The Bigger Protocol Moves First")
+st.markdown("## Round 4 — The Bigger Protocol Moves First")
 
 col_text, col_visual = st.columns(2)
 
@@ -436,7 +436,7 @@ st.markdown("---")
 
 # ── Round 5 — Yesterday's Spread Tells You Something ─────────────────────────
 
-st.markdown("### Round 5 — Today's Spread Tells You Something About Tomorrow's Spread")
+st.markdown("## Round 5 — Today's Spread Tells You Something About Tomorrow's Spread")
 
 col_text, col_visual = st.columns(2)
 
