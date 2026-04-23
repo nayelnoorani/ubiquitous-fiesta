@@ -218,7 +218,7 @@ for col, card in zip(cols, cards):
               <div style='font-size:0.9rem;color:rgba(250,250,250,0.7);margin:0 0 0.75rem;
               line-height:1.4;'>{card['finding']}</div>
               <a href='/Model_Results' style='font-size:0.85rem;color:rgba(250,250,250,0.45);
-              text-decoration:none;margin-top:auto;'>See full analysis →</a>
+              text-decoration:none;margin-top:auto;color:#FAFAFA;'>See full analysis →</a>
             </div>
             """,
             unsafe_allow_html=True,
