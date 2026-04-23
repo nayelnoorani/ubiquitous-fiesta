@@ -113,10 +113,13 @@ st.markdown(
 )
 
 st.markdown(
+    "<div style='margin-top:1.5rem;margin-bottom:0.25rem;'>"
     "Compound pays COMP token rewards directly to borrowers, reducing their effective cost by "
     "43 basis points on average — making it the cheaper place to borrow on most days, despite the "
     "higher headline rate. That's why every spread in this analysis is calculated net of rewards, "
     "not off the headline rate."
+    "</div>",
+    unsafe_allow_html=True,
 )
 
 st.markdown("---")
