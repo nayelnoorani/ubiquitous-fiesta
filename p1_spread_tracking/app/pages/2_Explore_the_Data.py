@@ -69,7 +69,7 @@ st.markdown("---")
 st.markdown("## Compound looks more expensive. It isn't.")
 
 _HDR = "font-size:1.5rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(250,250,250,0.45);margin:0 0 0.2rem;"
-_NUM = "font-size:3.9rem;font-weight:700;margin:0;line-height:1;"
+_NUM = "font-size:2.6rem;font-weight:700;margin:0;line-height:1;"
 _LBL = "font-size:1.05rem;color:rgba(250,250,250,0.55);margin:0.1rem 0 0;"
 _SUB = "font-size:1rem;color:rgba(250,250,250,0.45);margin:0;"
 _CAP = "font-size:0.9rem;color:rgba(250,250,250,0.45);margin:0.5rem 0 0;"
