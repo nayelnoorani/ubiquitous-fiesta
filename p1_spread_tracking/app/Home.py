@@ -194,7 +194,7 @@ for col, card in zip(cols, cards):
             f"""
             <div style='border:1px solid {border_color};border-radius:8px;
             background:{bg_color};padding:1rem;margin-bottom:0.5rem;
-            min-height:230px;display:flex;flex-direction:column;'>
+            min-height:280px;display:flex;flex-direction:column;'>
               <div style='min-height:3.8rem;'>
                 <p style='font-size:0.9rem;color:rgba(250,250,250,0.6);
                 margin:0;line-height:1.4;'>{card['hypothesis']}</p>
