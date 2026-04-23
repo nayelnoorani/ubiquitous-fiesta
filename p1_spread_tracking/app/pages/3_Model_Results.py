@@ -7,9 +7,11 @@ import numpy as np
 import plotly.graph_objects as go
 import streamlit as st
 
-from utils.data import AAVE_COLOR, COMPOUND_COLOR, SPREAD_COLOR, get_episodes, load_wide
+from utils.data import AAVE_COLOR, COMPOUND_COLOR, SPREAD_COLOR, get_episodes, inject_global_css, load_wide
 
 st.set_page_config(page_title="Model & Statistical Results", layout="wide")
+
+inject_global_css()
 
 wide = load_wide()
 

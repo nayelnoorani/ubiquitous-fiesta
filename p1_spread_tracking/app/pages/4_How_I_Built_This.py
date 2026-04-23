@@ -7,9 +7,11 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
-from utils.data import SPREAD_COLOR, load_wide
+from utils.data import SPREAD_COLOR, inject_global_css, load_wide
 
 st.set_page_config(page_title="How I Built This", layout="wide")
+
+inject_global_css()
 
 wide = load_wide()
 

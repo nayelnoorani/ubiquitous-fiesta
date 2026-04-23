@@ -8,9 +8,11 @@ import plotly.graph_objects as go
 import streamlit as st
 from scipy import stats
 
-from utils.data import AAVE_COLOR, COMPOUND_COLOR, SPREAD_COLOR, get_episodes, load_wide
+from utils.data import AAVE_COLOR, COMPOUND_COLOR, SPREAD_COLOR, big_number, get_episodes, inject_global_css, load_wide
 
 st.set_page_config(page_title="Explore the Data", layout="wide")
+
+inject_global_css()
 
 wide = load_wide()
 
@@ -20,21 +22,6 @@ PANEL_BG = "rgba(26,29,35,0.0)"
 GRID_COLOR = "rgba(255,255,255,0.06)"
 AXIS_LINE_COLOR = "rgba(255,255,255,0.2)"
 AXIS_TICK_COLOR = "rgba(255,255,255,0.85)"
-
-
-def big_number(value: str, label: str, sub: str = "", compact: bool = False) -> None:
-    padding = "0.5rem 1rem" if compact else "1.25rem 1rem"
-    sub_html = f"<p style='font-size:1rem;color:rgba(250,250,250,0.45);margin:0;'>{sub}</p>" if sub else ""
-    st.markdown(
-        f"""
-        <div style='padding:{padding};'>
-          <p style='font-size:2.6rem;font-weight:700;margin:0;line-height:1;'>{value}</p>
-          <p style='font-size:1.05rem;color:rgba(250,250,250,0.55);margin:0.35rem 0 0;'>{label}</p>
-          {sub_html}
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
 
 
 def base_layout(fig: go.Figure, yrange=None) -> go.Figure:

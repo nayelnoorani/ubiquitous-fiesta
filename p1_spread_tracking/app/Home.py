@@ -1,4 +1,11 @@
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
 import streamlit as st
+
+from utils.data import big_number, inject_global_css
 
 st.set_page_config(
     page_title="Aave vs Compound — Spread Analysis",
@@ -6,15 +13,7 @@ st.set_page_config(
     layout="wide",
 )
 
-
-def placeholder(description: str) -> None:
-    st.markdown(
-        f'<div style="border:1px dashed rgba(180,180,180,0.3);border-radius:6px;'
-        f'padding:2rem;margin:0.5rem 0;text-align:center;'
-        f'color:rgba(200,200,200,0.5);font-style:italic;">'
-        f'[ {description} ]</div>',
-        unsafe_allow_html=True,
-    )
+inject_global_css()
 
 
 # ── Section 1: Opening Frame ──────────────────────────────────────────────────
@@ -61,8 +60,7 @@ st.markdown("<br>", unsafe_allow_html=True)
 # Card 1 — stat LEFT, text RIGHT
 c_stat, c_text = st.columns([1, 2])
 with c_stat:
-    st.markdown("# **p = 0.0**")
-    st.caption("Engle-Granger cointegration test")
+    big_number("p = 0.0", "Engle-Granger cointegration test")
 with c_text:
     st.markdown(
         "Aave and Compound share a long-run equilibrium that neither protocol can permanently escape. "
@@ -79,16 +77,14 @@ with c_text:
         "That's not slow arbitrage — that's near-instantaneous price discovery for a market that never closes."
     )
 with c_stat:
-    st.markdown("# **0.95 days**")
-    st.caption("Ornstein-Uhlenbeck half-life")
+    big_number("0.95 days", "Ornstein-Uhlenbeck half-life")
 
 st.markdown("<br>", unsafe_allow_html=True)
 
 # Card 3 — stat LEFT, text RIGHT
 c_stat, c_text = st.columns([1, 2])
 with c_stat:
-    st.markdown("# **0.19%**")
-    st.caption("Median daily spread")
+    big_number("0.19%", "Median daily spread")
 with c_text:
     st.markdown(
         "On a typical day, borrowing on Aave costs virtually the same as borrowing on Compound. "
@@ -106,8 +102,7 @@ with c_text:
         "stress doesn't break the market, it accelerates it."
     )
 with c_stat:
-    st.markdown("# **92.5%**")
-    st.caption("Spike episodes resolved within 7 days")
+    big_number("92.5%", "Spike episodes resolved within 7 days")
 
 st.markdown("---")
 
