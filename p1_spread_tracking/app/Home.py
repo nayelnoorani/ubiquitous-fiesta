@@ -22,10 +22,10 @@ col_text, col_visual = st.columns([2, 3])
 
 with col_text:
     st.markdown(
-        "<p style='font-size:1.7rem !important;font-weight:700;line-height:1.7;padding-top:1rem;'>"
+        "<div style='font-size:1.7rem;font-weight:700;line-height:1.7;padding-top:1rem;'>"
         "I've spent ten years analyzing interest rates in traditional finance. "
         "I came to DeFi with five reasonable hypotheses — the data overturned four of them."
-        "</p>"
+        "</div>"
         "<p style='font-size:1rem;line-height:1.7;color:rgba(250,250,250,0.55);font-style:italic;'>"
         "Here's where each one landed."
         "</p>",
