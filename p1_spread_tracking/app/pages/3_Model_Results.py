@@ -148,10 +148,11 @@ with col_visual:
         xaxis_title="Aave TVL change (%)",
         yaxis_title="Spread (%)",
         showlegend=False,
-        title=dict(
-            text="SAME-DAY TVL CHANGE VS SPREAD",
-            font=dict(size=11, color="rgba(250,250,250,0.4)"), x=0,
-        ),
+    )
+    st.markdown(
+        "<p style='font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;"
+        "color:rgba(250,250,250,0.4);margin-bottom:0;'>Same-day TVL change vs spread</p>",
+        unsafe_allow_html=True,
     )
     st.plotly_chart(fig_scatter, use_container_width=True)
 
