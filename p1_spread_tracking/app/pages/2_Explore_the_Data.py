@@ -91,10 +91,10 @@ with col_right:
     )
     r1, r2 = st.columns(2)
     with r1:
-        big_number("55%", "of days Aave is more expensive", "net of COMP rewards")
+        big_number("45%", "of days Aave costs more", "base rates only")
     with r2:
-        big_number("45%", "of days Compound is more expensive", "net of COMP rewards")
-    st.caption("After subtracting COMP rewards — Aave is the pricier borrow on most days")
+        big_number("55%", "of days Aave costs more", "net of COMP rewards")
+    st.caption("Once rewards are factored in, Aave is the pricier protocol most of the time")
 
 st.markdown(
     "Compound pays COMP token rewards directly to borrowers, reducing their effective cost by "
