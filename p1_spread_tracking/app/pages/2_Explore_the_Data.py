@@ -78,34 +78,34 @@ st.markdown(
     f"""
     <div style='display:grid;grid-template-columns:1fr 1fr;gap:3rem;'>
       <div>
-        <p style='{_HDR}'>The headline view</p>
+        <div style='{_HDR}'>The headline view</div>
         <div style='display:flex;gap:2.5rem;'>
           <div>
-            <p style='{_NUM}'>4.87%</p>
-            <p style='{_LBL}'>Aave mean borrow rate</p>
+            <div style='{_NUM}'>4.87%</div>
+            <div style='{_LBL}'>Aave mean borrow rate</div>
           </div>
           <div>
-            <p style='{_NUM}'>4.99%</p>
-            <p style='{_LBL}'>Compound mean borrow rate</p>
+            <div style='{_NUM}'>4.99%</div>
+            <div style='{_LBL}'>Compound mean borrow rate</div>
           </div>
         </div>
-        <p style='{_CAP}'>Base rates, no rewards adjustment — Compound appears more expensive</p>
+        <div style='{_CAP}'>Base rates, no rewards adjustment — Compound appears more expensive</div>
       </div>
       <div>
-        <p style='{_HDR}'>The full picture</p>
+        <div style='{_HDR}'>The full picture</div>
         <div style='display:flex;gap:2.5rem;'>
           <div>
-            <p style='{_NUM}'>45%</p>
-            <p style='{_LBL}'>of days Aave costs more</p>
-            <p style='{_SUB}'>base rates only</p>
+            <div style='{_NUM}'>45%</div>
+            <div style='{_LBL}'>of days Aave costs more</div>
+            <div style='{_SUB}'>base rates only</div>
           </div>
           <div>
-            <p style='{_NUM}'>55%</p>
-            <p style='{_LBL}'>of days Aave costs more</p>
-            <p style='{_SUB}'>net of COMP rewards</p>
+            <div style='{_NUM}'>55%</div>
+            <div style='{_LBL}'>of days Aave costs more</div>
+            <div style='{_SUB}'>net of COMP rewards</div>
           </div>
         </div>
-        <p style='{_CAP}'>Once rewards are factored in, Aave is the pricier protocol most of the time</p>
+        <div style='{_CAP}'>Once rewards are factored in, Aave is the pricier protocol most of the time</div>
       </div>
     </div>
     """,
