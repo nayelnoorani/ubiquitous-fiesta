@@ -199,7 +199,8 @@ with col_text:
     section_label("Tested")
     st.markdown(
         "Ornstein-Uhlenbeck fit split by regime — spike window (days since spike ≤ 7) vs "
-        "steady state. Survival analysis on 146 detected spike episodes."
+        "steady state. Survival analysis on 146 OU-detected spike episodes (vs 144 identified "
+        "by the >1% threshold on Page 2 — different detection methods)."
     )
     section_label("Found")
     st.markdown(
@@ -441,8 +442,8 @@ with col_text:
     section_label("Assumed")
     st.markdown(
         "With mean reversion this strong and a half-life under a day, autocorrelation should "
-        "carry useful predictive power. Yesterday's spread should tell you something about "
-        "tomorrow's."
+        "carry useful predictive power. Today's spread should tell you something about "
+        "tomorrow's spread."
     )
     section_label("Tested")
     st.markdown(
