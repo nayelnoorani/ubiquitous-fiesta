@@ -101,8 +101,9 @@ with col_right:
 
 st.markdown(
     "Compound pays COMP token rewards directly to borrowers, reducing their effective cost by "
-    "43 basis points on average. Compound is actually the cheaper place to borrow on most days — "
-    "which is why every spread in this analysis is calculated net of rewards, not off the headline rate."
+    "43 basis points on average — making it the cheaper place to borrow on most days, despite the "
+    "higher headline rate. That's why every spread in this analysis is calculated net of rewards, "
+    "not off the headline rate."
 )
 
 st.markdown("---")
@@ -112,9 +113,9 @@ st.markdown("---")
 st.markdown("## Same asset. Same chain. Very different moments.")
 
 st.markdown(
-    "A plan built on average assumptions will fail on average — Aave's mean borrow rate is 4.87%, "
-    "but its maximum was 56.7%. The chart is capped by default to keep the normal range readable; "
-    "switching to full scale shows what the average is hiding."
+    "Aave's mean borrow rate is 4.87%. Its maximum was 56.7%. A mean built from a distribution "
+    "that wide isn't much of a guide — the chart defaults to a capped view for readability, "
+    "but the full scale is the honest picture."
 )
 
 col_t1, col_t2 = st.columns(2)
@@ -197,8 +198,9 @@ st.markdown("## The spread is almost nothing. Until it isn't.")
 
 st.markdown(
     "The median daily spread between Aave and Compound is 0.19% — on most days, the two "
-    "protocols are essentially identical. But a kurtosis of 126.7 means the tails are extreme: "
-    "when spreads move, they move violently."
+    "protocols are essentially identical. The normal distribution overlaid on the chart is what "
+    "a well-behaved spread would look like. A kurtosis of 126.7 means this isn't one: the real "
+    "distribution towers at the centre, and when spreads move, they move violently."
 )
 
 col_hist, col_stats = st.columns([3, 2])
