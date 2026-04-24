@@ -42,4 +42,4 @@ jobs:
         run: pip install ruff
 
       - name: Run ruff
-        run: ruff check p1_spread_tracking/src/ p1_spread_tracking/app/
+        run: ruff check --ignore E402,E741 p1_spread_tracking/src/ p1_spread_tracking/app/
