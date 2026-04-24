@@ -54,7 +54,7 @@ def main():
     print(f"  Features before:   {wide.shape[1]}")
     print(f"  Features after:    {len(selected_cols)}")
     print(f"  Dropped:           {wide.shape[1] - len(selected_cols)}")
-    print(f"\n  Kept features:")
+    print("\n  Kept features:")
     for col in selected_cols:
         print(f"    {col}")
     print(f"\n  Elapsed: {elapsed:.2f}s")

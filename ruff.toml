@@ -1,0 +1,5 @@
+[lint]
+ignore = [
+    "E402",  # sys.path.insert before imports — intentional pattern for src/ resolution
+    "E741",  # ambiguous variable name `l` — used in list comprehensions
+]

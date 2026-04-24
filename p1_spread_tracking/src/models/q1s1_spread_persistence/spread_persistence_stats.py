@@ -44,8 +44,6 @@ def compute_acf_pacf(spread: pd.Series, nlags: int = MAX_LAGS) -> dict:
     # Confidence interval half-width at each lag (95%)
     acf_lower  = acf_ci[:, 0]  - acf_vals
     acf_upper  = acf_ci[:, 1]  - acf_vals
-    pacf_lower = pacf_ci[:, 0] - pacf_vals
-    pacf_upper = pacf_ci[:, 1] - pacf_vals
 
     # Significant lags: ACF value outside its 95% CI
     sig_acf_lags  = [i for i in range(1, nlags + 1)

@@ -176,7 +176,7 @@ def build_note(results: dict, train: pd.DataFrame, test: pd.DataFrame, elapsed: 
         "## Run Details\n",
         f"- Training: {train.index.min().date()} → {train.index.max().date()} ({len(train):,} days)",
         f"- Test:     {test.index.min().date()} → {test.index.max().date()} ({len(test):,} days)",
-        f"- Target:   `spread_vs_net` (Aave apyBase − Compound net borrow cost)\n",
+        "- Target:   `spread_vs_net` (Aave apyBase − Compound net borrow cost)\n",
         "## Model Performance\n",
         "| Model | MAE | RMSE | R² | Direction Acc |",
         "|---|---|---|---|---|",

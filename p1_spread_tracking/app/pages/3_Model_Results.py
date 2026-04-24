@@ -223,7 +223,7 @@ with col_visual:
     two_stats(
         "0.87 days", "Spike window half-life", "days since spike ≤ 7",
         "1.25 days", "Steady-state half-life", "days since spike > 7",
-        la=f"rgba(240,178,122,0.8)", ra="rgba(255,255,255,0.15)",
+        la="rgba(240,178,122,0.8)", ra="rgba(255,255,255,0.15)",
     )
 
     # Survival curve from episode durations

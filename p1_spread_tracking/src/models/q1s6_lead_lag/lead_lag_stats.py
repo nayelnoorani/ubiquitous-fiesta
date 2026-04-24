@@ -173,7 +173,7 @@ def build_note(ccf_res: dict, gc: dict, roll: dict, elapsed: float) -> str:
 
     lines += [
         "\n## 2. Granger Causality\n",
-        f"### Aave → Compound\n",
+        "### Aave → Compound\n",
         f"Min p: **{gf['min_p']}** (lag {gf['best_lag']}) — "
         f"{'Significant ✓' if gf['significant'] else 'Not significant'}\n",
         "| Lag | F-stat | p-value |",
@@ -183,7 +183,7 @@ def build_note(ccf_res: dict, gc: dict, roll: dict, elapsed: float) -> str:
         lines.append(f"| {lag} | {v['f']} | {v['p']} |")
 
     lines += [
-        f"\n### Compound → Aave\n",
+        "\n### Compound → Aave\n",
         f"Min p: **{gr['min_p']}** (lag {gr['best_lag']}) — "
         f"{'Significant ✓' if gr['significant'] else 'Not significant'}\n",
         "| Lag | F-stat | p-value |",

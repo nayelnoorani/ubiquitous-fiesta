@@ -174,7 +174,7 @@ fig_rates.add_trace(go.Scatter(
     fill="tonexty",
     fillcolor="rgba(240,178,122,0.15)",
     mode="lines",
-    line=dict(color=f"rgba(0,211,149,0.75)", width=1.5),
+    line=dict(color="rgba(0,211,149,0.75)", width=1.5),
     name=compound_label,
 ))
 

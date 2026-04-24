@@ -19,7 +19,7 @@ import pandas as pd
 from datetime import datetime
 from pathlib import Path
 
-from sklearn.linear_model import LinearRegression, Lasso, LassoCV
+from sklearn.linear_model import LinearRegression, LassoCV
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from xgboost import XGBRegressor
@@ -166,7 +166,7 @@ def build_note(models: list[dict], train_len: int, test_len: int,
         "## Run Details\n",
         f"- Training: {train_start} → {train_end} ({train_len} days)",
         f"- Test:     {test_start} → {test_end} ({test_len} days)",
-        f"- Target:   next-day spread change (spread_{{t+1}} − spread_t)",
+        "- Target:   next-day spread change (spread_{t+1} − spread_t)",
         f"- Features: `{'`, `'.join(FEATURE_COLS)}`\n",
 
         "## Model Performance\n",

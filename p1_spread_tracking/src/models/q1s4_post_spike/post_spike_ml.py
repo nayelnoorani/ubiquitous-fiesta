@@ -164,7 +164,7 @@ def build_note(models: list[dict], interaction: dict,
         "## Run Details\n",
         f"- Training: {train_start} → {train_end} ({train_len} days)",
         f"- Test:     {test_start} → {test_end} ({test_len} days)",
-        f"- Target:   next-day spread change (spread_{{t+1}} − spread_t)\n",
+        "- Target:   next-day spread change (spread_{t+1} − spread_t)\n",
 
         "## Model Performance\n",
         "| Model | MAE | RMSE | R² | Direction Acc |",

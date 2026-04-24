@@ -190,7 +190,7 @@ def build_note(models: list[dict], train_len: int, test_len: int,
         "## Run Details\n",
         f"- Training: {train_start} → {train_end} ({train_len} days)",
         f"- Test:     {test_start} → {test_end} ({test_len} days)",
-        f"- Target:   next-day `spread_vs_net`",
+        "- Target:   next-day `spread_vs_net`",
         f"- Features: `{'`, `'.join(FEATURE_COLS)}`\n",
 
         "## Model Performance\n",
@@ -207,7 +207,7 @@ def build_note(models: list[dict], train_len: int, test_len: int,
     # AR order
     ar = next((m for m in models if "ar_order" in m), None)
     if ar:
-        lines.append(f"## AR Model\n")
+        lines.append("## AR Model\n")
         lines.append(f"- Selected order: p={ar['ar_order']} (AIC={ar['aic']})\n")
 
     # Linear regression coefficients

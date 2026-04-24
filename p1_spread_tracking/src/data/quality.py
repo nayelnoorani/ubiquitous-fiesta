@@ -140,7 +140,7 @@ def print_quality_report(result: dict):
         print("\n  All checks passed with no warnings.")
 
     stats = result["statistics"]
-    print(f"\nSTATISTICS:")
+    print("\nSTATISTICS:")
     print(f"  Total rows: {stats['total_rows']:,}")
 
     if "group_distribution" in stats:
